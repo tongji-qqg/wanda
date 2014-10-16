@@ -1,0 +1,655 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Prototype</title>
+	<!-- Latest compiled and minified CSS -->
+
+    <link rel="stylesheet" type="text/css" href="../css/custom.css"/>
+    <link rel="stylesheet" type="text/css" href="../css/isotope.css"/>
+    <link rel="stylesheet" type="text/css" href="../css/flippant.css"/>
+	<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+	<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
+	<!-- ZTree -->
+	<link rel="stylesheet" href="../plugins/zTree_v3/css/demo.css" type="text/css">
+	<link rel="stylesheet" href="../plugins/zTree_v3/css/zTreeStyle/zTreeStyle.css" type="text/css">
+	<!-- Optional theme -->
+	
+  
+	
+
+
+	<link rel="stylesheet" type="text/css" href="../css/custom.css"/>	
+	<link rel="stylesheet" type="text/css" href="../css/style.css">
+	<style>
+		.node {
+			stroke: #fff;
+			stroke-width: 1.5px;
+			background-image: url('data:image/svg+xml,%3Csvg%20version%3D%271.1%27%20id%3D%27Layer_1%27%20xmlns%3D%27http%3A//www.w3.org/2000/svg%27%20xmlns%3Axlink%3D%27http%3A//www.w3.org/1999/xlink%27%20x%3D%270px%27%20y%3D%270px%27%0A%20%20%20%20%20fill%3D%27white%27%20width%3D%2712px%27%20height%3D%2712px%27%20viewBox%3D%270%200%2012%2012%27%20enable-background%3D%27new%200%200%2012%2012%27%20xml%3Aspace%3D%27preserve%27%3E%0A%3Cpath%20d%3D%27M12%2C3.535V0H8.465L0%2C8.465V12h3.535L12%2C3.535z%20M0%2C0h3.535L0%2C3.535V0z%20M8.465%2C12L12%2C8.465V12H8.465z%27/%3E%0A%3C/svg%3E');
+		}
+		
+		.node.sourceType{		
+			stroke-width: 10px;
+			stroke-dasharray:10,10;
+		}
+		.link {
+			stroke: #999;
+			stroke-opacity: .6;
+		}
+		.panel {
+			width:100%;
+			float:right;
+			height:550px;
+			position:relative;
+			overflow: hidden;
+		}
+		.shadow {
+		   -moz-box-shadow:    inset 0 0 6px #777;
+		   -webkit-box-shadow: inset 0 0 6px #777;
+		   box-shadow:         inset 0 0 6px #777;
+		}
+		.sidenav {
+			margin-left: 10px;
+		}
+		.sidenav>li{
+			position: relative;
+		    display: block;
+		    width: 130px;
+		    padding: 20px 0px;
+		    margin-right: 0;
+		}
+
+		.sidenav>li>a{
+		  position: relative;
+		  display: block;
+		  color: #000;
+		  text-decoration: none;
+		}
+		.shadow-out {
+		  -moz-box-shadow:    3px 3px 5px 6px #ccc;
+		  -webkit-box-shadow: 3px 3px 5px 6px #ccc;
+		  box-shadow:         3px 3px 5px 6px #ccc;
+		}
+
+		/* 	------------	*/
+		.element .symbol {
+				color: #fff;
+				font-size: 12px;
+				left: 5px;
+				top: 40px;
+				font-weight: bold;
+				word-wrap: break-word;
+				word-break:break-all;
+			}
+			
+			.element.large .symbol {
+			    font-size: 12px;
+			}
+			
+			.element .name {
+				color: #fff;
+			    top: 80px;
+			    font-size: 12px;
+			    font-family:"微软雅黑";
+			    left: 5px;
+			}
+			
+			.element.large .name {
+			    font-size: 12px;
+			}
+			
+			.element .table-info-content {
+				color: #fff;
+				font-size: 12px;
+				top: 100px;
+				font-family: '微软雅黑';
+				width: 100%;
+			}
+			
+			.table-info-content *{
+				position: relative;
+			}
+			
+			.bs-glyphicons .glyphicon-class {
+				display: block;
+				text-align: center;
+				word-wrap: break-word;
+			}
+			.toolList {
+				height: 50px;
+				width: 50px;
+				position: absolute;
+				display: inline;
+			}
+			.fixcart {
+				height: 57px;
+				left: 90%;
+				min-height: 300px;
+				position: fixed;
+				top: 30%;
+				width: 57px;
+				display: block;
+			}
+			.fixcart>ul{
+				top:30px;
+				left:-40px;
+				list-style-type: none;
+			}
+			.dropdown:hover .dropdown-menu {
+			    display: block;
+			}
+	</style>
+	<script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+	<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+</head>
+<body>
+	<div class="header" style="margin-top:-20px" align="center">
+		<div class="row">
+			<div class="col-md-2 col-md-offset-1 " style="margin:30px 0 0 60px">
+				<img src="../images/logo_2.png" height="60px">		
+			</div>
+			<div class="col-md-5 col-md-offset-1" style="margin-top:30px;">
+				<ul class="myheader">
+					<li><a href="#" style="background-image: url('../images/btn_on_nav.png');">首页</a></li>
+					<li><a href="#">关于</a></li>
+					<li><a href="#">平台</a></li>
+					<li><a href="#">客户</a></li>
+					<li><a href="#">资源</a></li>
+				</ul>
+			</div>
+		</div>
+		<div style="float:right;color:#FFF;margin-right:150px;" >
+	      开放管理员 <img src="../images/ic_user.png" height="20px" alt="icon"><span style="color:#94d500">admin </span><a href="../index.html" class="btn btn-sm" style="background-color:#94d500;color:white">退出</a>
+	    </div>
+	</div>
+	<div class="location">
+		<ul>
+			<li><a href="#">首页 / </a></li>
+			<li><a href="#">资产管理服务 / </a></li>
+			<li><a href="#">平台管理 / </a></li>
+			<li><a href="#">资源视图 / </a></li>
+			<li><a href="#">资源地图浏览</a></li>
+		</ul>
+	</div>
+	<div class="container" style="margin-top:-30px;">
+		
+		<!-- Tab panes -->
+		<div class="tab-content">
+			<div class="tab-pane active" id="meta" style="background:white;overflow:hidden;">	
+				<div style="float:left;background:#EFEFEF;width:150px;height:600px;margin:0;" class="shadow">
+					<ul class="sidenav">
+						<li><a href="../user/page_3.html"><img width="20px" height="20px;" src="../images/d_mgm.png" alt=""> 数据资产管理 </a></li>
+						<li style="background:#CCC"><a href="#"><img width="20px" height="20px;" src="../images/d_apply.png"> 数据资产申请 </a></li>
+						<li><a href="../user/page5.html"><img width="20px" height="20px;" src="../images/d_analysis.png" alt=""> 分析利用	</a></li>
+						<li><a href="#"><img width="20px" height="20px;" src="../images/share.png" alt=""> 我的分享 </a></li>
+						<li><a href="#"><img width="20px" height="20px;" src="../images/trash.png" alt=""> 回收站 </a></li>
+					</ul>	
+				</div>
+				<div id="main" class="mainCanvas" style="float:left">
+				</div>
+				<div class="fixcart">
+				    <button type="button" data-toggle="dropdown" class="btn btn-default dropdown-toggle">购物车 <span class="caret"></span></button>
+				    <ul class="dropdown-menu" id="cart">
+				        <li><a href="#">测试表</a></li>
+				    </ul>
+				</div>
+				
+				<div id="detail" class="panel shadow-out" style="overflow:scroll;">
+                    <!--左边工具栏-->
+                    <div class="toolList" style="width:10px;left:905px;">
+	                    <script type="text/javascript">
+	                    var tree=false;
+	                    function change(){
+		                    if(!tree){
+		                    	$('#meta-view').css('display','block');
+		                    	$('#detail-main').css('display','none');
+		                    	tree=true;
+		                    }else{
+		                    	$('#meta-view').css('display','none');
+		                    	$('#detail-main').css('display','block');
+		                    	tree=false;
+		                    }	
+	                    }
+	                    
+	                    </script>
+                       <button type="button" class="btn btn-default" style="margin: 5px;" onclick="$('body').click()">
+                            <span class="glyphicon glyphicon-log-out"></span>
+                        </button>
+                        <button type="button" class="btn btn-default" style="margin: 5px;" onclick="change()">
+                            <span class="glyphicon glyphicon-floppy-open"></span>
+                        </button>                        
+                    </div>
+	                <!--/左边工具栏-->
+	                <div id="meta-view" style="display:none">
+	                	<h2>学校数据库</h2>
+		                <div id="detail-meta" style="width:36%;float:left;display:inline-block;">
+							<div style="background-color:#BBB;">
+								<div style="width:90%;padding-bottom:20px">							
+									<table id="metatable" class="table table-striped" style="margin-left:5%;background:#DDD">
+										<tr><td>Resource Type</td><td>mysql</td></tr>
+										<tr><td>Metadata Created Date</td><td>2014-1-1</td></tr>
+										<tr><td>Metadata Updated Date</td><td>2014-1-2</td></tr>
+										<tr><td>Publisher</td><td>tongji</td></tr>
+										<tr><td>Identifier</td><td>sse</td></tr>
+										<tr><td>Maintainer</td><td>bryce</td></tr>
+										<tr><td>Maintainer Email</td><td>123@123.com</td></tr>
+										<tr><td>Access Level</td><td>public</td></tr>
+										<tr><td>Accrualperiodicity</td><td>5</td></tr>
+										<tr><td>Bureaucode</td><td>1111</td></tr>
+										<tr><td>Datadictionary</td><td>pen peo</td></tr>
+										<tr><td>Harvest Object Id</td><td>#123</td></tr>
+										<tr><td>Harvest Source Id</td><td>#124</td></tr>
+										<tr><td>Harvest Source Title</td><td>#125</td></tr>
+										<tr><td>Issued</td><td>NO</td></tr>
+										<tr><td>Modified</td><td>NO</td></tr>
+										<tr><td>Programcode</td><td>hello world</td></tr>
+										<tr><td>References</td><td>http://xxx.xxx</td></tr>
+										<tr><td>Source Datajson Identifier</td><td>#eee</td></tr>
+										<tr><td>Source Hash</td><td>#(xxxx)</td></tr>
+										<tr><td>Temporal</td><td>hello</td></tr>
+									</table>
+								</div>
+							</div>
+						</div>
+		                <div id="tree" style="display:inline-block;margin-left:30px;margin-top:-10px;width:10%">
+							<div class="content_wrap" >
+								<div class="zTreeDemoBackground left">
+									<ul id="treeDemo" class="ztree" style="height:500px;"></ul>
+								</div>
+							</div>
+		                </div>
+	                </div>
+	                <div id="detail-main" class="detail-mainCanvas" style="width:75%;padding-left:20px;">
+	                </div>
+				</div>
+			</div>
+		</div>
+	</div>	
+	<div class="footer">
+		<p>© Bryce 2014</p>
+	</div>
+	<!-- JQuery -->
+	<script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+	<script src="http://code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
+	<!-- Latest compiled and minified JavaScript -->
+	
+
+	<script type="text/javascript" src="../js/d3.js"></script>
+
+	<script type="text/javascript">
+	var width = $('.container').width()-200;
+	var left  = Math.floor(($('body').width() - width)/2);
+	//var height = document.documentElement.clientHeight-100;
+	var height = $(window).height()-100;
+	$("#detail").css('margin-top',(height+30) * -1)
+	$("#detail").css('right',$('.container').width() * -1 - 30)
+	var force = d3.layout.force().charge(-800).linkDistance(300).size([width, height]);		
+	var svg = d3.select(".mainCanvas").append("svg").attr("width", width).attr("height", height);
+	var area = [];
+	
+	var typeData=[
+		{name:"未分类资源",type:0,image:"../images/class/ic_1.png"},
+		{name:"公共卫生",type:1,image:"../images/class/ic_2.png"},
+		{name:"农业",type:2,image:"../images/class/ic_3.png"},
+		{name:"教育",type:3,image:"../images/class/ic_4.png"},
+		{name:"GIS",type:4,image:"../images/class/ic_5.png"},
+		{name:"卫生",type:5,image:"../images/class/ic_6.png"},
+		{name:"社保",type:6,image:"../images/class/ic_7.png"}
+	]
+	//xml,db,picture,word,H
+	var dataTypeIcon = ['','','','','']
+	
+	
+	var color = d3.scale.category20();
+	
+	(function(){
+		
+		function renderType(data){
+				
+				var rectWidth = svg.attr('width')/9;
+				var half     =  svg.attr('width') / 3;
+				var typeRect = svg.selectAll(".typeRect").data(data).enter().append("g");
+				typeRect.append("rect")
+				.attr("width",rectWidth-30)
+				.attr("height",90)
+				.attr("x",function(d,i){var x=i*rectWidth % half;area[i]={};area[i].x = x;return x;})
+				.attr("y",function(d,i){var y=Math.floor( i*rectWidth / half )* 140 + 30;area[i].y=y;return y;})
+				.style("fill", function(d) {return color(d.type);});
+				//typeRect.append("text").style("font-size", 12).text(function(d) {return d.name;}).style("fill", "#fff").style("text-anchor", "middle").style("font-family", "Arial").attr("x",function(d,i){return i*rectWidth+rectWidth/2}).attr("y",15);
+				typeRect.append("image")
+				   .attr('x',function(d,i){return i*rectWidth % half + 10})
+				   .attr('y',function(d,i){return Math.floor( i*rectWidth / half )* 140 + 35})
+				   .attr('width', 60)
+				   .attr('height', 60)
+				   .attr("xlink:href",function(d) {return d.image;})
+
+				typeRect.append("text")
+					.style("font-size", 12)
+					.text(function(d) {return d.name;})
+					.style("fill", "#fff")
+					.style("text-anchor", "middle")
+					.style("font-family", "Arial")
+					.attr('x',function(d,i){return i*rectWidth % half + 40})
+					.attr('y',function(d,i){return Math.floor( i*rectWidth / half )* 140 + 110});
+
+				typeRect.on('click',function(e,i){
+					//filterType(i);
+				});
+				
+				
+		}
+		
+		function filterType(type){
+			var node = svg.selectAll(".node");
+			node.classed("hidden", false);
+			var nodeNum = [];
+			var linkNum = [];
+			var len = dataSource.nodes.length;
+			for(var i=0;i<len;i++){
+				var obj = dataSource.nodes[i];
+				if(obj.type==type){
+					nodeNum.push(i);
+				}				
+			}			
+		}	
+		//renderType(typeData);
+	})()  
+		
+		
+				
+	</script>
+	<script type="text/javascript">
+	(function(){
+		var dataSource = {
+			nodes:[{
+				name:"计算机系",
+				size:50,
+				type:1,
+				dataType:0,
+				sourceType:0,
+				id:0			
+			},{
+				name:"社会学",
+				size:45,
+				type:3,
+				dataType:2,
+				sourceType:1,
+				id:1		
+			},{
+				name:"社保系统",
+				size:85,
+				type:1,		
+				dataType:1,
+				sourceType:0,
+				id:2			
+			},{
+				name:"统计学",
+				size:45,
+				type:3,	
+				dataType:3,
+				sourceType:1,
+				id:3				
+			},{
+				name:"卫生日志",
+				size:80,
+				type:5,	
+				dataType:1,
+				sourceType:0,
+				id:4				
+			},{
+				name:"市场营销",
+				size:50,
+				type:0,	
+				dataType:4,
+				sourceType:0,
+				id:	5			
+			}],
+			links:[
+				{source:0,target:2},				
+				{source:2,target:3},				
+				{source:2,target:5},
+			]
+		}
+		function render(data,type) {
+				force.nodes(data.nodes).links(data.links).start();
+				
+				var link = svg.selectAll(".link").data(data.links).enter().append("line").attr("class", "link").style("stroke-width", function(d) {return 2; });
+				
+				svg.selectAll(".link").data(data.links).exit().remove();
+								
+				var node = svg.selectAll(".node")
+				.data(data.nodes).enter()
+				.append("circle")
+				.attr("class", "node")
+				.attr("r", function(d){return d.size;})
+				.style("fill", function(d) {return color(d.type);})
+				.classed('sourceType',function(d){return 1==d.sourceType })
+				.call(force.drag);
+				
+				svg.selectAll(".node").data(data.nodes).exit()
+				
+				var nodeText = svg.selectAll(".nodeText")
+				.data(data.nodes).enter()
+				.append("text")
+				.attr("class", "nodeText")
+				.text(function(d) {return d.name;})
+				.style("fill", "#fff")
+				.style("font-family", "'微软雅黑'")
+      			.style("text-anchor", "middle").style("font-size", 12).call(force.drag);
+      				
+      			var nodeDbType = svg.selectAll(".nodeDbType")
+      			.data(data.nodes).enter()
+      			.append("text")
+      			.attr("class", "nodeText")
+      			.text(function(d) {return dataTypeIcon[d.dataType];})
+      			.style("fill", "#fff").style("font-family", "'FontAwesome'")
+      			.style("text-anchor", "middle").style("font-size", '1.5em').call(force.drag);
+      				
+      			svg.selectAll(".nodeText").data(data.nodes).exit()
+
+				node.append("title").text(function(d) {
+					return d.size+"G";
+				});	
+				
+				
+				
+				node.on('dblclick',function(e){
+					//$("body").load('main3.html');
+					//
+					//$('.mainCanvas').animate({width:'toggle'});
+					clicknode();
+					return false;
+				});
+					
+				var show = false;			
+				var detailWidth = parseInt($("#detail").css('width'));
+				function clicknode(){
+					
+					if(!show){
+						$( "#detail" ).animate({right: "-5"}, 700, function() {});
+						show = true;	
+					}else{
+						$( "#detail" ).animate({right: -1 * detailWidth - 5}, 700, function() {});
+						show = false;
+					}
+				}
+				$('#detail').on('click',function(e){
+					e.preventDefault();
+					return false
+				})
+
+				$('body').click(function(){
+					if(show)
+						clicknode();
+				})
+				force.on("tick", function() {
+					
+					link.attr("x1", function(d) {
+						return d.source.x;
+					}).attr("y1", function(d) {
+						return d.source.y;
+					}).attr("x2", function(d) {
+						return d.target.x;
+					}).attr("y2", function(d) {
+						return d.target.y;
+					});
+
+					node.attr("cx", function(d) {
+						return d.x;
+					}).attr("cy", function(d) {
+						return d.y;
+					});
+					
+					nodeText.attr("x", function(d) {
+						return d.x;
+					}).attr("y", function(d) {
+						return d.y-10;
+					});	
+					
+					nodeDbType	.attr("x", function(d) {
+						return d.x;
+					}).attr("y", function(d) {
+						return d.y+20;
+					});				
+				});				
+		}
+
+		render(dataSource,1);
+	})()
+		
+	</script>	
+
+
+	<script src="../js/jquery.isotope.min.js"></script>
+    <script src="../js/flippant.js"></script>
+    <script src="../js/tables.js"></script>
+	<script type="text/javascript" src="../plugins/mindmup-editabletable.js"></script>
+    <!-- JQuery -->
+	<!-- Latest compiled and minified JavaScript -->
+	
+	
+	<script type="text/javascript">
+		$(function() {
+			var width = $('.container').width() - 40;
+			//var height = document.documentElement.clientHeight-20;
+			var height = $(window).height();
+			$("#tree").css('height',height);
+			var $container = $('.detail-mainCanvas');
+			$container.css({
+				width:width,
+				height:height
+			})
+			var len = tables.length;
+			for(var i = 0; i < len; i++) {
+				var table = tables[i]
+				var elementStr = ''
+				elementStr=elementStr+('<div class="element "> <p class="number"> <span class="glyphicon glyphicon-plus-sign table-add" style="color: #fff;margin-right:20px;" />  <span class="glyphicon glyphicon-info-sign table-info" style="color: #fff" /> </p> <h3 class="symbol">' + table.name + '</h3> <h2 class="name">' + table.comment + '</h2> <p class="weight"></p>');
+				elementStr=elementStr+('<div class="table-info-content hidden" > <table class="table" >');
+				var columns = table.columns;
+				var cLen = columns.length;
+				for(var j=0;j
+                        <cLen;j++){
+					var column = columns[j];
+					elementStr=elementStr+('<tr> <td class="table-title">'+column.name+'</td> <td class="table-title comment">'+column.comment+'</td> <td class="table-title comment">'+column.dataType+'</td> </tr>');
+				}
+				elementStr=elementStr+'</table> </div> </div>'
+				$container.append(elementStr);
+			}
+
+			$container.isotope({
+				itemSelector : '.element'
+			});
+							
+
+			
+	  		$('.table-add').click(function(){
+	  			var x = $(this).parent().parent().find('h2').text();
+	  			$('#cart').append('<li  class="divider"></li><li><a href="#"> '+x +' </a></li>')
+	  			$('#cart').dropdown();
+	  		})
+	  			
+
+	  		$('.table-info').click(function(){	
+	  			var flipper = this.parentNode.parentNode		  				  			
+		        $(flipper).toggleClass('large');		  				  			
+		        $(flipper).find('.table-info-content').toggleClass('hidden');			        
+		        $container.isotope('reLayout');		  			
+	  		});
+	  		
+	  		return;
+	  		var key = 'filter';
+	  		var value= '';
+	  		options[ key ] = value;
+	  		$container.isotope( options );
+
+		});
+    </script>
+	
+	<!-- zTree -->
+	<script type="text/javascript" src="../plugins/zTree_v3/js/jquery.ztree.core-3.5.js"></script>
+	<script type="text/javascript" src="../plugins/zTree_v3/js/jquery.ztree.excheck-3.5.js"></script>
+	<script type="text/javascript" src="../plugins/zTree_v3/js/jquery.ztree.exedit-3.5.js"></script>
+	
+	<script type="text/javascript">
+
+		var setting = {
+			view: {
+				dblClickExpand: false
+			}
+		};
+
+		var zNodes =[
+			{id:2, name:"Tables", open:true,
+				children:[
+					   {id:21, name:"事故信息记录表", open: true,
+					        children:[
+					        {id:211, name:"Columns",open: true, children:[]},
+					        {id:212, name:"Keys",open: true,children:[{id:2121, name:"Key_1"}]}
+					   ]},
+					   {id:22, name:"交通运输设备"},
+					   {id:23, name:"供货商信息"},
+					   {id:24, name:"保养信息表"},
+					   {id:25, name:"固定资产主件"},
+					   {id:26, name:"国有资产产权登记"},
+					   {id:27, name:"年度定额费用"},
+					   {id:28, name:"房屋及建筑物"},
+					   {id:29, name:"数据词典"},
+					   {id:30, name:"文书材料信息"}
+				]}
+  	 	];
+
+  	 	function makeNodes(){
+  	 		var tableNames = ["事故信息记录表", "交通运输设备", "供货商信息", "保养信息表", "固定资产主件", "国有资产产权登记", "年度定额费用", "房屋及建筑物","数据词典", "文书材料信息"]
+  	 		var colunms1 = [
+  	 		"事故信息", "车辆信息", "事故现场", "事故发生", "肇事地点", "肇事人", "后果分类", "主体分类", "事故责任", "事故描述", "备注"
+  	 		]
+  	 		var database = {id:1, name:"Tables", open:true, children:[]};
+  	 		for(var i=0;i<9;i++){
+  	 			var id = 10 + i;
+  	 			var table = {id:10+i, name:tableNames[i], children:[
+  	 				{id:20+i, name:"Columns",open: true, children:[]},
+					{id:30+i, name:"Keys",open: true,children:[{id:300+i, name:"Key_1", noR:true}]}
+  	 			]};
+  	 			if(i==0){
+  	 				table.open = true;
+  	 				for(var j=0;j<colunms1.length;j++)
+  	 				table.children[0].children.push({id:(20+i)*10+j, name:colunms1[j], noR: true})
+  	 			}
+  	 			database.children.push(table);
+  	 		}
+  	 		return database;
+  	 	}
+
+		
+		var zTree;
+		$(document).ready(function(){
+			$.fn.zTree.init($("#treeDemo"), setting, makeNodes());
+			zTree = $.fn.zTree.getZTreeObj("treeDemo");
+		});
+	</script>
+
+	<script type="text/javascript">
+
+	</script>
+</body>
+</html>

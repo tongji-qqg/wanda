@@ -154,7 +154,8 @@
             <script type="text/javascript">
 			$(function() {
 				var width = 560;
-				var height = document.documentElement.clientHeight-20;
+				//var height = document.documentElement.clientHeight-20;
+				var height = $(window).height()-20;
 				$("#tree").css('height',height);
 				var $container = $('.mainCanvas');
 				$container.css({

@@ -103,7 +103,8 @@
 	<script type="text/javascript">
 	var width = $('.container').width();
 	var left  = Math.floor(($('body').width() - width)/2);
-	var height = document.documentElement.clientHeight-100;
+	//var height = document.documentElement.clientHeight-100;
+	var height = $(window).height()-100;
 	$("#detail").css('margin-top',height * -1)
 	$("#detail").css('right',width * -1)
 	$("#frame").css("height",height);
