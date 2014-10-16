@@ -123,10 +123,10 @@
 			}
 			.fixcart {
 				height: 57px;
-				left: 90%;
+				left: 83.5%;
 				min-height: 300px;
-				position: fixed;
-				top: 30%;
+				position: absolute;
+				top: 129px;
 				width: 57px;
 				display: block;
 			}
@@ -188,8 +188,8 @@
 				<div id="main" class="mainCanvas" style="float:left">
 				</div>
 				<div class="fixcart">
-				    <button type="button" data-toggle="dropdown" class="btn btn-default dropdown-toggle">购物车 <span class="caret"></span></button>
-				    <ul class="dropdown-menu" id="cart">
+				    <button id="cart-btn" style="height:31px;" type="button" data-toggle="dropdown" class="btn btn-default btn-sm dropdown-toggle">购物车 <span class="caret"></span></button>
+				    <ul class="dropdown-menu" id="cart" style="min-width:140px;">
 				        <li><a href="#">测试表</a></li>
 				    </ul>
 				</div>
@@ -524,6 +524,7 @@
     <script src="../js/flippant.js"></script>
     <script src="../js/tables.js"></script>
 	<script type="text/javascript" src="../plugins/mindmup-editabletable.js"></script>
+	
     <!-- JQuery -->
 	<!-- Latest compiled and minified JavaScript -->
 	
@@ -565,7 +566,8 @@
 	  		$('.table-add').click(function(){
 	  			var x = $(this).parent().parent().find('h2').text();
 	  			$('#cart').append('<li  class="divider"></li><li><a href="#"> '+x +' </a></li>')
-	  			$('#cart').dropdown();
+	  			alert(x+' 添加到购物车')
+	  			$('.dropdown-menu').dropdown();
 	  		})
 	  			
 
@@ -649,7 +651,12 @@
 	</script>
 
 	<script type="text/javascript">
-
+	$(function(){
+		$('#cart-btn').click(function(){
+			$('.dropdown-menu').dropdown();
+			return false;
+		})
+	})
 	</script>
 </body>
 </html>
