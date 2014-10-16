@@ -1,0 +1,13 @@
+body {
+	padding: 0;
+	margin: 0;
+	font-family: "微软雅黑";
+}
+.toolList {
+	height: 335px;
+	left: 15px;
+	min-height: 300px;
+	position: fixed;
+	top: 65px;
+	width: 57px;
+}

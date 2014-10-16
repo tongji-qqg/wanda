@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+	<title>Big Data Management Example</title>
+
+	<!-- Latest compiled and minified CSS -->
+	<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+
+	<!-- Optional theme -->
+	<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
+
+	<!-- ZTree -->
+	<link rel="stylesheet" href="../plugins/zTree_v3/css/demo.css" type="text/css">
+	<link rel="stylesheet" href="../plugins/zTree_v3/css/zTreeStyle/zTreeStyle.css" type="text/css">
+
+	<!-- menu -->
+	<link rel="stylesheet" type="text/css" href="../plugins/jQuery-contextMenu/src/jquery.contextMenu.css">
+
+	<link rel="stylesheet" type="text/css" href="../css/style.css">
+
+	<style type="text/css">
+		div#rMenu {
+			position:absolute; 
+			visibility:hidden; 
+			top:0; 
+			background-color: transparent;
+			text-align: left;
+			padding: 2px;
+		}
+		div#rMenu ul li{
+			margin: 1px 0;
+			padding: 0 5px;
+			cursor: pointer;
+			list-style: none outside none;
+			background-color: #DFDFDF;
+		}
+	</style>
+	<!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+	<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+	<!--[if lt IE 9]>
+	<script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+	<script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+	<![endif]-->
+</head>
+
+<body>
+<div class="header" style="margin-top:-20px" align="center">
+		<div class="row">
+			<div class="col-md-1"></div>
+			<div class="col-md-2" style="margin:30px 0 0 60px">
+				<img src="../images/logo_2.png" height="60px">		
+			</div>
+			<div class="col-md-5 col-md-offset-1" style="margin-top:30px;">
+				<ul class="myheader">
+					<li><a href="#" style="background-image: url('../images/btn_on_nav.png');">首页</a></li>
+					<li><a href="#">关于</a></li>
+					<li><a href="#">平台</a></li>
+					<li><a href="#">客户</a></li>
+					<li><a href="#">资源</a></li>
+				</ul>
+			</div>
+		</div>
+		<div style="float:right;color:#FFF;margin-right:150px;" >
+			资产管理员 <img src="../images/ic_user.png" height="20px" alt="icon"><span style="color:#94d500">admin </span><a href="../index.html" class="btn btn-sm" style="background-color:#94d500;color:white">退出</a>
+		</div>
+	</div>
+	<div class="location">
+		<ul>
+			<li><a href="#">首页 / </a></li>
+			<li><a href="#">资产管理服务 / </a></li>
+			<li><a href="#">平台管理 / </a></li>
+			<li><a href="#">资源视图 / </a></li>
+			<li><a href="#">资源地图浏览</a></li>
+		</ul>
+	</div>
+	<div class="container">
+			<div class="col-md-3" style="margin-top:0">
+				<div style="background-color:#BBB;margin-top:-20px">
+					<div style="width:90%;padding-bottom:20px">
+						<h2 style="margin-left:5%;padding-top:20px;">DataSetA</h2>
+						<p style="float:right;margin-top:-30px"><a href="../hekai2/">返回</a></p>
+						<table class="table table-striped" style="margin-left:5%;background:#DDD">
+							<tr><td>Resource Type</td></tr>
+							<tr><td>Metadata Created Date</td></tr>
+							<tr><td>Metadata Updated Date</td></tr>
+							<tr><td>Publisher</td></tr>
+							<tr><td>Identifier</td></tr>
+							<tr><td>Maintainer</td></tr>
+							<tr><td>Maintainer Email</td></tr>
+							<tr><td>Access Level</td></tr>
+							<tr><td>Accrualperiodicity</td></tr>
+							<tr><td>Bureaucode</td></tr>
+							<tr><td>Datadictionary</td></tr>
+							<tr><td>Harvest Object Id</td></tr>
+							<tr><td>Harvest Source Id</td></tr>
+							<tr><td>Harvest Source Title</td></tr>
+							<tr><td>Issued</td></tr>
+							<tr><td>Modified</td></tr>
+							<tr><td>Programcode</td></tr>
+							<tr><td>References</td></tr>
+							<tr><td>Source Datajson Identifier</td></tr>
+							<tr><td>Source Hash</td></tr>
+							<tr><td>Temporal</td></tr>
+						</table>
+					</div>
+				</div>
+			</div>
+
+			<div class="col-md-9">
+				<!-- Nav tabs -->
+				<ul class="nav nav-tabs" role="tablist">
+					<li class="active">
+						<a href="#tree" role="tab" data-toggle="tab">树型视图</a>
+					</li>
+					<li>
+						<a href="#list" role="tab" data-toggle="tab">平铺视图</a>
+					</li>
+				</ul>
+
+				<!-- Tab panes -->
+				<div class="tab-content">
+					<div class="tab-pane active" id="tree">
+						<h1>DataSetA 详细信息</h1>
+						<div class="content_wrap">
+							<div class="zTreeDemoBackground left">
+								<ul id="treeDemo" class="ztree"></ul>
+							</div>
+							<div id="rMenu">
+							<ul>
+								<li id="m_add" onclick="tableDef();">表数据详情</li>
+								<li id="m_del" onclick="tableRela();">表关系一览 </li>
+								<li id="m_check" onclick="tablePrev();">表数据预览200</li>
+							</ul>
+						</div>
+						</div>
+						
+					</div>
+					<div class="tab-pane" id="list">
+						<div class="context-menu-one box menu-1">
+							<img id="list-img" src="../images/aa.png">
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="footer">
+			<p>© Bryce 2014</p>
+		</div>
+
+
+	<!-- JQuery -->
+	<script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+	<script src="http://code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
+	<!-- Latest compiled and minified JavaScript -->
+	<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+
+	<!-- zTree -->
+	<script type="text/javascript" src="../plugins/zTree_v3/js/jquery.ztree.core-3.5.js"></script>
+	<script type="text/javascript" src="../plugins/zTree_v3/js/jquery.ztree.excheck-3.5.js"></script>
+	<script type="text/javascript" src="../plugins/zTree_v3/js/jquery.ztree.exedit-3.5.js"></script>
+	
+	<script type="text/javascript">
+
+		var setting = {
+			view: {
+				dblClickExpand: false
+			},
+			callback: {
+				onRightClick: OnRightClick
+			}
+		};
+
+		var zNodes =[
+			{id:2, name:"Tables", open:true,
+				children:[
+					   {id:21, name:"事故信息记录表", open: true,
+					        children:[
+					        {id:211, name:"Columns",open: true, children:[]},
+					        {id:212, name:"Keys",open: true,children:[{id:2121, name:"Key_1"}]}
+					   ]},
+					   {id:22, name:"交通运输设备"},
+					   {id:23, name:"供货商信息"},
+					   {id:24, name:"保养信息表"},
+					   {id:25, name:"固定资产主件"},
+					   {id:26, name:"国有资产产权登记"},
+					   {id:27, name:"年度定额费用"},
+					   {id:28, name:"房屋及建筑物"},
+					   {id:29, name:"数据词典"},
+					   {id:30, name:"文书材料信息"}
+				]}
+  	 	];
+
+  	 	function makeNodes(){
+  	 		var tableNames = ["事故信息记录表", "交通运输设备", "供货商信息", "保养信息表", "固定资产主件", "国有资产产权登记", "年度定额费用", "房屋及建筑物","数据词典", "文书材料信息"]
+  	 		var colunms1 = [
+  	 		"事故信息", "车辆信息", "事故现场", "事故发生", "肇事地点", "肇事人", "后果分类", "主体分类", "事故责任", "事故描述", "备注"
+  	 		]
+  	 		var database = {id:1, name:"Tables", open:true, children:[]};
+  	 		for(var i=0;i<9;i++){
+  	 			var id = 10 + i;
+  	 			var table = {id:10+i, name:tableNames[i], children:[
+  	 				{id:20+i, name:"Columns",open: true, children:[]},
+					{id:30+i, name:"Keys",open: true,children:[{id:300+i, name:"Key_1", noR:true}]}
+  	 			]};
+  	 			if(i==0){
+  	 				table.open = true;
+  	 				for(var j=0;j<colunms1.length;j++)
+  	 				table.children[0].children.push({id:(20+i)*10+j, name:colunms1[j], noR: true})
+  	 			}
+  	 			database.children.push(table);
+  	 		}
+  	 		return database;
+  	 	}
+		function OnRightClick(event, treeId, treeNode) {
+			console.log(event, treeId, treeNode) ;
+			if (!treeNode && event.target.tagName.toLowerCase() != "button" && $(event.target).parents("a").length == 0) {
+				zTree.cancelSelectedNode();
+				showRMenu("root", event.clientX - 400, event.pageY-230);
+			} else if (treeNode && !treeNode.noR) {
+				zTree.selectNode(treeNode);
+				showRMenu("node", event.clientX - 400, event.pageY-230);
+			}
+		}
+
+		function showRMenu(type, x, y) {
+			$("#rMenu ul").show();
+			if (type=="root") {
+				$("#m_del").hide();
+				$("#m_check").hide();
+				$("#m_unCheck").hide();
+			} else {
+				$("#m_del").show();
+				$("#m_check").show();
+				$("#m_unCheck").show();
+			}
+			rMenu.css({"top":y+"px", "left":x+"px", "visibility":"visible"});
+
+			$("body").bind("mousedown", onBodyMouseDown);
+		}
+		function hideRMenu() {
+			if (rMenu) rMenu.css({"visibility": "hidden"});
+			$("body").unbind("mousedown", onBodyMouseDown);
+		}
+		function onBodyMouseDown(event){
+			if (!(event.target.id == "rMenu" || $(event.target).parents("#rMenu").length>0)) {
+				rMenu.css({"visibility" : "hidden"});
+			}
+		}
+		var addCount = 1;
+		function tableDef(){
+			window.location.href="./tableDef.html"
+		}
+		function tablePrev(){
+			window.location.href="./tablePreview.html"
+		}
+		function tableRela(){
+			window.location.href="./tableRelation.html"
+		}
+		// function addTreeNode() {
+		// 	hideRMenu();
+		// 	var newNode = { name:"增加" + (addCount++)};
+		// 	if (zTree.getSelectedNodes()[0]) {
+		// 		newNode.checked = zTree.getSelectedNodes()[0].checked;
+		// 		zTree.addNodes(zTree.getSelectedNodes()[0], newNode);
+		// 	} else {
+		// 		zTree.addNodes(null, newNode);
+		// 	}
+		// }
+		// function removeTreeNode() {
+		// 	hideRMenu();
+		// 	var nodes = zTree.getSelectedNodes();
+		// 	if (nodes && nodes.length>0) {
+		// 		if (nodes[0].children && nodes[0].children.length > 0) {
+		// 			var msg = "要删除的节点是父节点，如果删除将连同子节点一起删掉。\n\n请确认！";
+		// 			if (confirm(msg)==true){
+		// 				zTree.removeNode(nodes[0]);
+		// 			}
+		// 		} else {
+		// 			zTree.removeNode(nodes[0]);
+		// 		}
+		// 	}
+		// }
+		// function checkTreeNode(checked) {
+		// 	var nodes = zTree.getSelectedNodes();
+		// 	if (nodes && nodes.length>0) {
+		// 		zTree.checkNode(nodes[0], checked, true);
+		// 	}
+		// 	hideRMenu();
+		// }
+		// function resetTree() {
+		// 	hideRMenu();
+		// 	$.fn.zTree.init($("#treeDemo"), setting, zNodes);
+		// }
+
+		var zTree, rMenu;
+		$(document).ready(function(){
+			$.fn.zTree.init($("#treeDemo"), setting, makeNodes());
+			zTree = $.fn.zTree.getZTreeObj("treeDemo");
+			rMenu = $("#rMenu");
+		});
+
+		$("#list-img").bind('contextmenu', function(event, treeId, treeNode){
+			showRMenu("node", event.clientX, event.pageY);
+			event.preventDefault();
+		})
+	</script>
+
+	<script type="text/javascript" src="../plugins/jQuery-contextMenu/src/jquery.contextMenu.js"></script>
+	<script type="text/javascript" src="../plugins/jQuery-contextMenu/src/jquery.ui.position.js"></script>
+	<script type="text/javascript">
+	$(function(){
+	    $.contextMenu({
+	        selector: '.context-menu-one', 
+	        callback: function(key, options) {
+	            switch(key){
+	            	case 'def': window.location.href = "./tableDef.html";break;
+	            	case 'rel': window.location.href = "./tableRelation.html";break;
+	            	case 'pre': window.location.href = "./tablePreview.html";break;
+	            } 
+	        },
+	        items: {
+	            "def": {name: "表数据详情"},
+	            "rel": {name: "表关系一览"},
+	            "pre": {name: "表数据预览200"},
+	        }
+	    });
+	    
+	    $('.context-menu-one').on('click', function(e){
+	        console.log('clicked', this);
+	    })
+	});
+	</script>
+</body>
+</html>

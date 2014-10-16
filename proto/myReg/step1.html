@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+	<title>Big Data Management Example</title>
+
+	<!-- Latest compiled and minified CSS -->
+	<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+	<link rel="stylesheet" type="text/css" href="../plugins/bootstrap-switch/css/bootstrap-switch.min.css">
+	<!-- Optional theme -->
+	<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
+	
+	<link rel="stylesheet" type="text/css" href="../css/style.css">
+	<!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+	<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+	<!--[if lt IE 9]>
+	<script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+	<script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+	<![endif]-->
+	<style type="text/css">
+	.mya{
+		border:1px solid #ddd;
+		display: block;	    
+	    background-repeat: no-repeat;
+	    height:100px;
+	    width: 100%;
+	    color: transparent;
+	    -webkit-box-shadow: 2px 2px 5px 0px rgba(50, 50, 50, 0.75);
+		-moz-box-shadow:    2px 2px 5px 0px rgba(50, 50, 50, 0.75);
+		box-shadow:         2px 2px 5px 0px rgba(50, 50, 50, 0.75);
+	}	
+	.mya:hover
+	{ 
+		background-image:url('../images/blank.png');
+		color:black;
+	}
+	.mysql{
+		background-image:url('../images/mysql.jpg')
+	}
+	.oracle{
+		background-image:url('../images/oracle.gif')
+	}
+	.mssql{
+		background-image:url('../images/mssql.jpg')
+	}
+	.mongo{
+		background-image:url('../images/mongo.jpg')
+	}
+	.redis{
+		background-image:url('../images/redis.png')
+	}
+	.hadoop{
+		background-image:url('../images/hadoop.jpg')
+	}
+	.hdfs{
+		background-image:url('../images/hdfs.png')
+	}
+	.hive{
+		background-image:url('../images/hive.png')
+	}
+	.hbase{
+		background-image:url('../images/hbase.png')
+	}
+	.excel{
+		background-image:url('../images/excel.png')
+	}
+	.csv	{
+		background-image:url('../images/csv.png')
+	}
+	.xml{
+		background-image:url('../images/xml.png')
+	}
+	.json{
+		background-image:url('../images/json.png')
+	}
+	.txt{
+		background-image:url('../images/txt.png')
+	}
+	.stretch{
+	/* Will stretch to specified width/height */
+	  background-size: 200px 150px;
+	}
+	.stretch-content{
+	/* Will stretch to width/height of element */
+	  background-size: 100% 100%;
+	}
+
+	.resize-width{
+	/* width: 150px, height: auto to retain aspect ratio */
+	  background-size: 150px Auto;
+	}
+	.resize-height{
+	/* height: 150px, width: auto to retain aspect ratio */
+	  background-size: Auto 150px;
+	}
+	.resize-fill-and-clip{ 
+	  /* Resize to fill and retain aspect ratio.
+	     Will cause clipping if aspect ratio of box is different from image. */ 
+	  background-size: cover;
+	}
+	.resize-best-fit{
+	/* Resize to best fit and retain aspect ratio.
+	   Will cause gap if aspect ratio of box is different from image. */ 
+	  background-size: contain;
+	}
+
+	</style>
+</head>
+
+<body>
+
+	<div class="header" style="margin-top:-20px" align="center">
+		<div class="row">
+			<div class="col-md-1"></div>
+			<div class="col-md-2" style="margin:30px 0 0 60px">
+				<img src="../images/logo_2.png" height="60px">		
+			</div>
+			<div class="col-md-5 col-md-offset-1" style="margin-top:30px;">
+				<ul class="myheader">
+					<li><a href="#" style="background-image: url('../images/btn_on_nav.png');">首页</a></li>
+					<li><a href="#">关于</a></li>
+					<li><a href="#">平台</a></li>
+					<li><a href="#">客户</a></li>
+					<li><a href="#">资源</a></li>
+				</ul>
+			</div>
+		</div>
+		<div style="float:right;color:#FFF;margin-right:150px;" >
+			数据管理员 <img src="../images/ic_user.png" height="20px" alt="icon"><span style="color:#94d500">admin </span><a href="../index.html" class="btn btn-sm" style="background-color:#94d500;color:white">退出</a>
+		</div>
+	</div>
+	<div class="location">
+		<ul>
+			<li><a href="#">首页 / </a></li>
+			<li><a href="#">资产管理服务 / </a></li>
+			<li><a href="#">平台管理 / </a></li>
+			<li><a href="#">资源视图 / </a></li>
+			<li><a href="#">资源地图浏览</a></li>
+		</ul>
+	</div>
+	<div class="container">
+		
+
+		<!-- Nav tabs -->
+		<ul class="nav nav-tabs" role="tablist" style="margin-top:2px">
+			<li class="active">
+				<a href="#step1" role="tab" data-toggle="tab">选择资源类型</a>
+			</li>
+			<li>
+				<a href="step2.html" role="tab">设定接入方式</a>
+			</li>
+			<li>
+				<a href="step3.html" role="tab">资源描述</a>
+			</li>
+			<li>
+				<a href="step4.html" role="tab">资源内容</a>
+			</li>
+		</ul>
+
+		<!-- Tab panes -->
+		<div class="tab-content" >
+			<div class="tab-pane active" id="step1">
+			<h1>选择一种数据源</h1>
+				<div class="row" style="margin-top:20px;">
+					<div class="col-md-10">
+						<p>装有cuteinfo前置机吗</p>	
+					</div>
+					<div class="col-md-2" style="margin-top:-6px;">
+						<input id="cuteinfo" type="checkbox" name="mapOrListInput" checked>	
+					</div>
+				</div>
+
+
+				<hr/>
+				<div class="row">
+					<div class="col-md-3">
+						<a href="#" class="btn mysql mya stretch-content" data-type="mysql">
+							<h3>MySql 5.6</h3>	
+						</a>
+					</div>
+					<div class="col-md-3">
+						<a href="#" class="btn oracle mya stretch-content" data-type="oracle">
+							<h3>Oracle</h3>	
+						</a>
+					</div>
+					<div class="col-md-3">
+						<a href="#" class="btn mssql mya stretch-content" data-type="mssql">
+							<h3>MsSql</h3>	
+						</a>
+					</div>
+				</div>
+
+				<div class="row" style="margin-top:10px;">
+					<div class="col-md-3">
+						<a href="#" class="btn mongo mya stretch-content" data-type="mongo">
+							<h3>Mongodb 2.6</h3>	
+						</a>
+					</div>
+					<div class="col-md-3">
+						<a href="#" class="btn redis mya stretch-content" data-type="redis">
+							<h3>Redis</h3>	
+						</a>
+					</div>					
+				</div>
+
+				<div class="row" style="margin-top:10px;">
+					<div class="col-md-3">
+						<h2>Hadoop 1</h2>
+					</div>
+					<div class="col-md-3">
+						<a href="#" class="btn hdfs mya stretch-content" data-type="hdfs">
+							<h3>HDFS 1</h3>	
+						</a>
+					</div>
+					<div class="col-md-3">
+						<a href="#" class="btn hbase mya stretch-content" data-type="hbase">
+							<h3>HBase 1</h3>	
+						</a>
+					</div>	
+				</div>
+
+				<div class="row" style="margin-top:10px;">
+					<div class="col-md-3">
+						<h2>Hadoop 2</h2>
+					</div>
+					<div class="col-md-3">
+						<a href="#" class="btn hdfs mya stretch-content" data-type="hdfs">
+							<h3>HDFS 2</h3>	
+						</a>
+					</div>
+					<div class="col-md-3">
+						<a href="#" class="btn hbase mya stretch-content" data-type="hbase">
+							<h3>HBase 2</h3>	
+						</a>
+					</div>	
+				</div>
+
+				<hr/>
+				<div class="row" style="margin-top:10px;">
+					<div class="col-md-3">
+						<a href="#" class="btn excel mya stretch-content" data-type="excel">
+							<h3>Excel</h3>	
+						</a>
+					</div>
+					<div class="col-md-3">
+						<a href="#" class="btn csv mya stretch-content" data-type="csv">
+							<h3>CSV</h3>	
+						</a>
+					</div>
+					<div class="col-md-3">
+						<a href="#" class="btn xml mya stretch-content" data-type="xml">
+							<h3>XML</h3>	
+						</a>
+					</div>
+					<div class="col-md-3">
+						<a href="#" class="btn json mya stretch-content" data-type="json">
+							<h3>Json</h3>	
+						</a>
+					</div>		
+				</div>
+
+				<div class="row" style="margin-top:10px;">
+					<div class="col-md-3">
+						<a href="#" class="btn txt mya stretch-content" data-type="txt">
+							<h3>Txt</h3>	
+						</a>
+					</div>
+				</div>
+
+			</div>	
+		</div>
+
+
+
+		<div class="footer">
+			<p>© Bryce 2014</p>
+		</div>
+
+	</div>
+	<!-- JQuery -->
+	<script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+	<script src="http://code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
+
+	<!-- Latest compiled and minified JavaScript -->
+	<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+	<script type="text/javascript" src="../plugins/bootstrap-switch/js/bootstrap-switch.min.js"></script>
+	<script type="text/javascript">
+	$(function(){
+		$("input[name='mapOrListInput']").bootstrapSwitch({
+			"onText":'no',
+			"offText":'yes'
+		});
+	})
+
+	$(function(){
+		$(".col-md-3 a").click(function(e){
+			var type = $(this).attr("data-type");
+			var cuteinfo = "yes";
+			if($("#cuteinfo").attr('checked'))
+				cuteinfo = "no";		
+			window.location.href = "step2.html?type="+type +"&cuteinfo="+cuteinfo;
+			e.preventDefault();
+		})
+	})
+	</script>
+</body>
+</html>

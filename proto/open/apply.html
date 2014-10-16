@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Prototype</title>
+	<!-- Latest compiled and minified CSS -->
+	<!-- Latest compiled and minified CSS -->
+	<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+	<link rel="stylesheet" type="text/css" href="../plugins/bootstrap-switch/css/bootstrap-switch.min.css">
+	<!-- Optional theme -->
+	<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
+	<link rel="stylesheet" type="text/css" href="http://cdn.datatables.net/1.10.2/css/jquery.dataTables.css">
+	<link rel="stylesheet" type="text/css" href="../css/style.css">
+	<style type="text/css">
+	thead, tfoot {
+	    display: table-header-group;
+	}
+
+	.child-row{
+		display:block;width:100%;border:1px solid black;border-radius:4px;
+	}
+	</style>
+</head>
+<body>
+<div class="header" style="margin-top:-20px" align="center">
+		<div class="row">
+			<div class="col-md-2 col-md-offset-1 " style="margin:30px 0 0 60px">
+				<img src="../images/logo_2.png" height="60px">		
+			</div>
+			<div class="col-md-5 col-md-offset-1" style="margin-top:30px;">
+				<ul class="myheader">
+					<li><a href="#" style="background-image: url('../images/btn_on_nav.png');">首页</a></li>
+					<li><a href="#">关于</a></li>
+					<li><a href="#">平台</a></li>
+					<li><a href="#">客户</a></li>
+					<li><a href="#">资源</a></li>
+				</ul>
+			</div>
+		</div>
+		<div style="float:right;color:#FFF;margin-right:150px;" >
+	      开放管理员 <img src="../images/ic_user.png" height="20px" alt="icon"><span style="color:#94d500">admin </span><a href="../index.html" class="btn btn-sm" style="background-color:#94d500;color:white">退出</a>
+	    </div>
+	</div>
+	<div class="location">
+		<ul>
+			<li><a href="#">首页 / </a></li>
+			<li><a href="#">资产管理服务 / </a></li>
+			<li><a href="#">平台管理 / </a></li>
+			<li><a href="#">资源视图 / </a></li>
+			<li><a href="#">资源地图浏览</a></li>
+		</ul>
+	</div>
+	<div class="container">
+
+		<ul class="nav nav-tabs" role="tablist">
+			<li>
+				<a href="meta.html" role="tab" >元数据维护</a>
+			</li>
+			<li class="active">
+				<a href="#apply" role="tab"  data-toggle="tab">申请审核</a>
+			</li>
+			<li>
+				<a href="user.html" role="tab">租户审核</a>
+			</li>
+		</ul>
+		
+		<!-- Tab panes -->
+		<div class="tab-content">
+			<div class="tab-pane active" id="apply">		
+				<table id="example" class="display" cellspacing="0" width="100%">
+					<thead>
+						<tr>
+							<th>序号</th>
+							<th>租户</th>
+							<th>描述</th>
+							<th>申请时间</th>
+							<th>状态</th>
+							<th>操作</th>
+						</tr>
+					</thead>
+					<tfoot>
+						<tr>
+							<th>序号</th>
+							<th>租户</th>
+							<th>描述</th>
+							<th>申请时间</th>
+							<th>状态</th>
+							<th>操作</th>
+						</tr>
+					</tfoot>
+
+					<tbody></tbody>
+				</table>		
+			</div>
+		</div>
+	</div>	
+	<!-- Modal -->
+	<div class="modal fade" id="modal-approve" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	  <div class="modal-dialog">
+	    <div class="modal-content">
+	      <div class="modal-header">
+	        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+	        <h4 class="modal-title" id="myModalLabel">审核</h4>
+	      </div>
+	      <div class="modal-body">
+	        <table class="table table-striped" cellspacing="0" width="100%">
+				<thead>
+					<tr>
+						<th>序号</th>
+						<th>租户</th>
+						<th>描述</th>
+						<th>申请时间</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<th>2</th>
+						<th>租户2</th>
+						<th>违章照片</th>
+						<th>14-6-21</th>
+					</tr>
+				</tbody>
+			</table>
+			<div>
+				<a href="#" data-dismiss="modal" class="btn btn-success">通过</a>
+				<a href="#" class="btn-reject btn btn-warning">不通过</a>
+			</div>
+			<div id="reason" style="display:none">
+				<h2>不通过理由</h2>
+				<textarea name="reject" cols="60" rows="10"></textarea>
+				<br>
+				<a href="#" class="btn-cancel-reject btn btn-primary">取消</a>
+				<a href="#" data-dismiss="modal" class="btn btn-danger">确定</a>
+			</div>
+	      </div>
+	      <div class="modal-footer">
+	        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+	      </div>
+	    </div>
+	  </div>
+	</div>
+
+	<!-- Modal -->
+	<div class="modal fade" id="modal-back" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	  <div class="modal-dialog">
+	    <div class="modal-content">
+	      <div class="modal-header">
+	        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+	        <h4 class="modal-title" id="myModalLabel">回收</h4>
+	      </div>
+	      <div class="modal-body">
+	        <table class="table table-striped" cellspacing="0" width="100%">
+				<thead>
+					<tr>
+						<th>序号</th>
+						<th>租户</th>
+						<th>描述</th>
+						<th>申请时间</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<th>2</th>
+						<th>租户2</th>
+						<th>违章照片</th>
+						<th>14-6-21</th>
+					</tr>
+				</tbody>
+			</table>
+			<div >
+				<h2>回收过理由</h2>
+				<textarea name="reject" cols="60" rows="10"></textarea>
+				<br>
+				<a href="#" data-dismiss="modal" class="btn btn-danger">确定</a>
+			</div>
+	      </div>
+	      <div class="modal-footer">
+	        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+	      </div>
+	    </div>
+	  </div>
+	</div>
+	<div class="footer">
+		<p>© Bryce 2014</p>
+	</div>
+	<!-- JQuery -->
+	<script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+	<script src="http://code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
+
+	<!-- Latest compiled and minified JavaScript -->
+	<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+	<script type="text/javascript" src="../plugins/bootstrap-switch/js/bootstrap-switch.min.js"></script>
+	<script type="text/javascript" src="http://cdn.datatables.net/1.10.2/js/jquery.dataTables.min.js"></script>
+	<script type="text/javascript">
+	$(function(){
+		
+		var table = $('#example').DataTable(); 
+		
+		var data = {
+			"set":[
+				"刷卡流水记录","诊疗记录", "慢性病分析", "影响资料库",
+				"危险品运输车辆", "公交线路", "违章记录", "轨交记录", "违章照片",
+				"市场主题信息", "市场主题互联网动态", "违规欺诈记录",
+				"养老保险", "医疗保险缴费情况", "违规信息",
+				"线索征集", "侦察信息", "审判信息"
+			],
+			"year":["13","14"],
+			"month":["1","2","3","4","5","6"],
+			"day":["10","11","12","21","22"],
+			"state":["待审核","通过","不通过"],
+			"oper":["<a href='#' data-toggle='modal' data-target='#modal-back'>回收</a>", "<a href='#' data-toggle='modal' data-target='#modal-approve'>审核</a>"]
+		}
+		var counter = 1;
+		for(var i=0;i<15;i++){			
+			var arr = [];
+			arr.push(counter);
+			arr.push("租户"+counter++);
+			arr.push(getRandom(data.set));
+			arr.push(getRandom(data.year)+"-"+getRandom(data.month)+"-"+getRandom(data.day));
+			var state = getRandom(data.state);
+			arr.push(state);
+			if(state=="通过") arr.push(data.oper[0]);
+			else arr.push(data.oper[1]);
+
+			table.row.add( arr ).draw(); 	
+		}
+		
+		////////////////////////////////////////////////////////////////
+		//  set filter
+		////////////////////////////////////////////////////////////////
+		$('#example tfoot th').each( function () { 
+			var title = $('#example thead th').eq( $(this).index() ).text();
+			if(!(getColType(title) == "text")) return; 
+			if(title == "描述")
+				$(this).html( '<input style="width:300px" type="text" placeholder="Search" />');
+			else
+				$(this).html( '<input style="width:60%" type="text" placeholder="Search" />');
+		});
+		table.columns().eq( 0 ).each( function ( colIdx ) { 
+			$( 'input', table.column( colIdx ).footer() ).on( 'keyup change', function () {
+			 table.column( colIdx ) .search( this.value ) .draw(); 
+			}); 
+		}); 
+		$("#example tfoot th").each( function ( i ) {
+			var title = $('#example thead th').eq( $(this).index() ).text();
+			if(!(getColType(title) == "select")) return;
+
+		 	var select = $('<select><option value=""></option></select>') .appendTo( $(this).empty() )
+		 	.on( 'change', function () {
+		 	 	var val = $(this).val(); 
+		 	 	table.column( i ) .search( val ? '^'+$(this).val()+'$' : val, true, false ) .draw(); 
+		 	 } ); 
+		 	table.column( i ).data().unique().sort().each( function ( d, j ) {
+		 	 	select.append( '<option value="'+d+'">'+d+'</option>' ) 
+		 	 } ); 
+		 } );
+
+
+		////////////////////////////////////////////////////////////////
+		//  some functions
+		////////////////////////////////////////////////////////////////
+		function getColType(title){
+			if(title == "状态")
+				return "select"
+			else if(title == "租户" || title == "描述" || title == "申请时间")
+				return "text";
+			else return ""
+		}
+		function getRandom(arr){
+			return arr[Math.floor((Math.random() * arr.length))];
+		}
+	})
+	
+	$(function(){
+		$(".btn-reject").click(function(){
+			$("#reason").css("display","block");
+		})
+		$(".btn-cancel-reject").click(function(){
+			$("#reason").css("display","none");
+		})
+	})
+
+	</script>
+</body>
+</html>

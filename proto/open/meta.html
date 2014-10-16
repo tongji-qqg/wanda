@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Prototype</title>
+	<!-- Latest compiled and minified CSS -->
+	<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+
+	<!-- Optional theme -->
+	<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
+	<link rel="stylesheet" type="text/css" href="../css/custom.css"/>	
+	<link rel="stylesheet" type="text/css" href="../css/style.css">
+	<style>
+	.node {
+		stroke: #fff;
+		stroke-width: 1.5px;
+		background-image: url('data:image/svg+xml,%3Csvg%20version%3D%271.1%27%20id%3D%27Layer_1%27%20xmlns%3D%27http%3A//www.w3.org/2000/svg%27%20xmlns%3Axlink%3D%27http%3A//www.w3.org/1999/xlink%27%20x%3D%270px%27%20y%3D%270px%27%0A%20%20%20%20%20fill%3D%27white%27%20width%3D%2712px%27%20height%3D%2712px%27%20viewBox%3D%270%200%2012%2012%27%20enable-background%3D%27new%200%200%2012%2012%27%20xml%3Aspace%3D%27preserve%27%3E%0A%3Cpath%20d%3D%27M12%2C3.535V0H8.465L0%2C8.465V12h3.535L12%2C3.535z%20M0%2C0h3.535L0%2C3.535V0z%20M8.465%2C12L12%2C8.465V12H8.465z%27/%3E%0A%3C/svg%3E');
+	}
+	
+	.node.sourceType{		
+		stroke-width: 10px;
+		stroke-dasharray:10,10;
+	}
+	.link {
+		stroke: #999;
+		stroke-opacity: .6;
+	}
+	.panel {
+		width:100%;
+		float:right;
+		height:550px;
+		background: #d9dada;
+		position:relative;
+		overflow: hidden;
+	}
+	</style>
+</head>
+<body>
+<div class="header" style="margin-top:-20px" align="center">
+		<div class="row">
+			<div class="col-md-2 col-md-offset-1 " style="margin:30px 0 0 60px">
+				<img src="../images/logo_2.png" height="60px">		
+			</div>
+			<div class="col-md-5 col-md-offset-1" style="margin-top:30px;">
+				<ul class="myheader">
+					<li><a href="#" style="background-image: url('../images/btn_on_nav.png');">首页</a></li>
+					<li><a href="#">关于</a></li>
+					<li><a href="#">平台</a></li>
+					<li><a href="#">客户</a></li>
+					<li><a href="#">资源</a></li>
+				</ul>
+			</div>
+		</div>
+		<div style="float:right;color:#FFF;margin-right:150px;" >
+	      开放管理员 <img src="../images/ic_user.png" height="20px" alt="icon"><span style="color:#94d500">admin </span><a href="../index.html" class="btn btn-sm" style="background-color:#94d500;color:white">退出</a>
+	    </div>
+	</div>
+	<div class="location">
+		<ul>
+			<li><a href="#">首页 / </a></li>
+			<li><a href="#">资产管理服务 / </a></li>
+			<li><a href="#">平台管理 / </a></li>
+			<li><a href="#">资源视图 / </a></li>
+			<li><a href="#">资源地图浏览</a></li>
+		</ul>
+	</div>
+	<div class="container">
+
+		<ul class="nav nav-tabs" role="tablist">
+			<li class="active">
+				<a href="#meta" role="tab"  data-toggle="tab">元数据维护</a>
+			</li>
+			<li>
+				<a href="apply.html" role="tab">申请审核</a>
+			</li>
+			<li>
+				<a href="user.html" role="tab">租户审核</a>
+			</li>
+		</ul>
+		
+		<!-- Tab panes -->
+		<div class="tab-content">
+			<div class="tab-pane active" id="meta" style="background:white;overflow:hidden;">	
+				<div id="main" class="mainCanvas" style="float:left">
+				</div>
+				<div id="detail" class="panel">
+					<iframe id="frame" src="main3.html" frameBorder="0"> </iframe>
+				</div>
+			</div>
+		</div>
+	</div>	
+	<div class="footer">
+		<p>© Bryce 2014</p>
+	</div>
+	<!-- JQuery -->
+	<script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+	<script src="http://code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
+	<!-- Latest compiled and minified JavaScript -->
+	<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+
+	<script type="text/javascript" src="../js/d3.js"></script>
+
+	<script type="text/javascript">
+	var width = $('.container').width();
+	var left  = Math.floor(($('body').width() - width)/2);
+	var height = document.documentElement.clientHeight-100;
+	$("#detail").css('margin-top',height * -1)
+	$("#detail").css('right',width * -1)
+	$("#frame").css("height",height);
+	$("#frame").css("width",width);
+	var force = d3.layout.force().charge(-800).linkDistance(300).size([width, height]);		
+	var svg = d3.select(".mainCanvas").append("svg").attr("width", width).attr("height", height);
+	var area = [];
+	
+	var typeData=[
+		{name:"未分类资源",type:0,image:"../images/class/ic_1.png"},
+		{name:"公共卫生",type:1,image:"../images/class/ic_2.png"},
+		{name:"农业",type:2,image:"../images/class/ic_3.png"},
+		{name:"教育",type:3,image:"../images/class/ic_4.png"},
+		{name:"GIS",type:4,image:"../images/class/ic_5.png"},
+		{name:"卫生",type:5,image:"../images/class/ic_6.png"},
+		{name:"社保",type:6,image:"../images/class/ic_7.png"}
+	]
+	//xml,db,picture,word,H
+	var dataTypeIcon = ['','','','','']
+	
+	
+	var color = d3.scale.category20();
+	
+	(function(){
+		
+		function renderType(data){
+				
+				var rectWidth = svg.attr('width')/9;
+				var half     =  svg.attr('width') / 3;
+				var typeRect = svg.selectAll(".typeRect").data(data).enter().append("g");
+				typeRect.append("rect")
+				.attr("width",rectWidth-30)
+				.attr("height",90)
+				.attr("x",function(d,i){var x=i*rectWidth % half;area[i]={};area[i].x = x;return x;})
+				.attr("y",function(d,i){var y=Math.floor( i*rectWidth / half )* 140 + 30;area[i].y=y;return y;})
+				.style("fill", function(d) {return color(d.type);});
+				//typeRect.append("text").style("font-size", 12).text(function(d) {return d.name;}).style("fill", "#fff").style("text-anchor", "middle").style("font-family", "Arial").attr("x",function(d,i){return i*rectWidth+rectWidth/2}).attr("y",15);
+				typeRect.append("image")
+				   .attr('x',function(d,i){return i*rectWidth % half + 10})
+				   .attr('y',function(d,i){return Math.floor( i*rectWidth / half )* 140 + 35})
+				   .attr('width', 60)
+				   .attr('height', 60)
+				   .attr("xlink:href",function(d) {return d.image;})
+
+				typeRect.append("text")
+					.style("font-size", 12)
+					.text(function(d) {return d.name;})
+					.style("fill", "#fff")
+					.style("text-anchor", "middle")
+					.style("font-family", "Arial")
+					.attr('x',function(d,i){return i*rectWidth % half + 40})
+					.attr('y',function(d,i){return Math.floor( i*rectWidth / half )* 140 + 110});
+
+				typeRect.on('click',function(e,i){
+					//filterType(i);
+				});
+				
+				
+		}
+		
+		function filterType(type){
+			var node = svg.selectAll(".node");
+			node.classed("hidden", false);
+			var nodeNum = [];
+			var linkNum = [];
+			var len = dataSource.nodes.length;
+			for(var i=0;i<len;i++){
+				var obj = dataSource.nodes[i];
+				if(obj.type==type){
+					nodeNum.push(i);
+				}				
+			}			
+		}	
+		renderType(typeData);
+	})()  
+		
+		
+				
+	</script>
+	<script type="text/javascript">
+	(function(){
+		var dataSource = {
+			nodes:[{
+				name:"计算机系",
+				size:50,
+				type:1,
+				dataType:0,
+				sourceType:0,
+				id:0			
+			},{
+				name:"社会学",
+				size:45,
+				type:3,
+				dataType:2,
+				sourceType:1,
+				id:1		
+			},{
+				name:"社保系统",
+				size:85,
+				type:1,		
+				dataType:1,
+				sourceType:0,
+				id:2			
+			},{
+				name:"统计学",
+				size:45,
+				type:3,	
+				dataType:3,
+				sourceType:1,
+				id:3				
+			},{
+				name:"卫生日志",
+				size:80,
+				type:5,	
+				dataType:1,
+				sourceType:0,
+				id:4				
+			},{
+				name:"市场营销",
+				size:50,
+				type:0,	
+				dataType:4,
+				sourceType:0,
+				id:	5			
+			}],
+			links:[
+				{source:0,target:2},				
+				{source:2,target:3},				
+				{source:2,target:5},
+			]
+		}
+		function render(data,type) {
+				force.nodes(data.nodes).links(data.links).start();
+				
+				var link = svg.selectAll(".link").data(data.links).enter().append("line").attr("class", "link").style("stroke-width", function(d) {return 2; });
+				
+				svg.selectAll(".link").data(data.links).exit().remove();
+								
+				var node = svg.selectAll(".node")
+				.data(data.nodes).enter()
+				.append("circle")
+				.attr("class", "node")
+				.attr("r", function(d){return d.size;})
+				.style("fill", function(d) {return color(d.type);})
+				.classed('sourceType',function(d){return 1==d.sourceType })
+				.call(force.drag);
+				
+				svg.selectAll(".node").data(data.nodes).exit()
+				
+				var nodeText = svg.selectAll(".nodeText")
+				.data(data.nodes).enter()
+				.append("text")
+				.attr("class", "nodeText")
+				.text(function(d) {return d.name;})
+				.style("fill", "#fff")
+				.style("font-family", "'微软雅黑'")
+      			.style("text-anchor", "middle").style("font-size", 12).call(force.drag);
+      				
+      			var nodeDbType = svg.selectAll(".nodeDbType")
+      			.data(data.nodes).enter()
+      			.append("text")
+      			.attr("class", "nodeText")
+      			.text(function(d) {return dataTypeIcon[d.dataType];})
+      			.style("fill", "#fff").style("font-family", "'FontAwesome'")
+      			.style("text-anchor", "middle").style("font-size", '1.5em').call(force.drag);
+      				
+      			svg.selectAll(".nodeText").data(data.nodes).exit()
+
+				node.append("title").text(function(d) {
+					return d.size+"G";
+				});	
+				
+				node.on('mousemove',function(e){
+					var x1=e.x;var y1=e.y;
+					var rectWidth = svg.attr('width')/9;
+					var width = rectWidth - 30;
+					var i=1000;
+					for(var j=0;j<7;j++){
+						if(area[j].x < x1 && x1 < area[j].x+width && area[j].y < y1 && y1 < area[j].y+90){
+							i = j;
+							break;
+						}
+					}
+					if(i == 1000)	return;
+					//var i = Math.floor(x1/rectWidth);
+					var obj = d3.select(this);
+					dataSource.nodes[0].type=i;
+					obj.style('fill',color(i));
+				
+				});
+				
+				node.on('dblclick',function(e){
+					//$("body").load('main3.html');
+					//
+					//$('.mainCanvas').animate({width:'toggle'});
+					clicknode();
+					return false;
+				});
+					
+				var show = false;			
+				var detailWidth = parseInt($("#detail").css('width'));
+				function clicknode(){
+					
+					if(!show){
+						$( "#detail" ).animate({right: "0"}, 700, function() {});
+						show = true;	
+					}else{
+						$( "#detail" ).animate({right: -1 * detailWidth}, 700, function() {});
+						show = false;
+					}
+				}
+				$('body').click(function(){
+					if(show)
+						clicknode();
+				})
+				force.on("tick", function() {
+					
+					link.attr("x1", function(d) {
+						return d.source.x;
+					}).attr("y1", function(d) {
+						return d.source.y;
+					}).attr("x2", function(d) {
+						return d.target.x;
+					}).attr("y2", function(d) {
+						return d.target.y;
+					});
+
+					node.attr("cx", function(d) {
+						return d.x;
+					}).attr("cy", function(d) {
+						return d.y;
+					});
+					
+					nodeText.attr("x", function(d) {
+						return d.x;
+					}).attr("y", function(d) {
+						return d.y-10;
+					});	
+					
+					nodeDbType	.attr("x", function(d) {
+						return d.x;
+					}).attr("y", function(d) {
+						return d.y+20;
+					});				
+				});				
+		}
+
+		render(dataSource,1);
+	})()
+		
+	</script>	
+</body>
+</html>

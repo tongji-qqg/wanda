@@ -1,0 +1,533 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+	<title>Big Data Management Example</title>
+
+	<!-- Latest compiled and minified CSS -->
+	<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+	<link rel="stylesheet" type="text/css" href="../plugins/bootstrap-switch/css/bootstrap-switch.min.css">
+	<!-- Optional theme -->
+	<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
+	<link rel="stylesheet" type="text/css" href="http://cdn.datatables.net/1.10.2/css/jquery.dataTables.css">
+	<link rel="stylesheet" type="text/css" href="../css/style.css">
+	<!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+	<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+	<!--[if lt IE 9]>
+	<script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+	<script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+	<![endif]-->
+	<style type="text/css">
+	thead, tfoot {
+	    display: table-header-group;
+	}
+
+	.child-row{
+		display:block;width:100%;border:1px solid black;border-radius:4px;
+	}
+	</style>
+</head>
+
+<body>
+	<div class="header" style="margin-top:-20px" align="center">
+		<div class="row">
+			<div class="col-md-1"></div>
+			<div class="col-md-2" style="margin:30px 0 0 60px">
+				<img src="../images/logo_2.png" height="60px">		
+			</div>
+			<div class="col-md-5 col-md-offset-1" style="margin-top:30px;">
+				<ul class="myheader">
+					<li><a href="#" style="background-image: url('../images/btn_on_nav.png');">首页</a></li>
+					<li><a href="#">关于</a></li>
+					<li><a href="#">平台</a></li>
+					<li><a href="#">客户</a></li>
+					<li><a href="#">资源</a></li>
+				</ul>
+			</div>
+		</div>
+		<div style="float:right;color:#FFF;margin-right:150px;" >
+			数据管理员 <img src="../images/ic_user.png" height="20px" alt="icon"><span style="color:#94d500">admin </span><a href="../index.html" class="btn btn-sm" style="background-color:#94d500;color:white">退出</a>
+		</div>
+	</div>
+	<div class="location">
+		<ul>
+			<li><a href="#">首页 / </a></li>
+			<li><a href="#">资产管理服务 / </a></li>
+			<li><a href="#">平台管理 / </a></li>
+			<li><a href="#">资源视图 / </a></li>
+			<li><a href="#">资源地图浏览</a></li>
+		</ul>
+	</div>
+	<div class="container">
+<!-- 		<div class="header">
+			<ul class="nav nav-pills pull-right">
+				<li class="active">
+					<a href="#">Home</a>
+				</li>
+				<li>
+					<a href="#">About</a>
+				</li>
+				<li>
+					<a href="#">Contact</a>
+				</li>
+			</ul>
+			<h3 class="text-muted">big data management</h3>
+		</div>
+		<div style="margin-top:10px"></div>
+		<div class="jumbotron"></div>
+
+		<hr/> -->
+		
+		<div class="panel-group" id="accordion">
+			<div class="panel panel-default">
+				<div class="panel-heading">
+					<h4 class="panel-title">
+						<a data-toggle="collapse" data-parent="#accordion" href="#collapseOne">链接申请</a>
+					</h4>
+				</div>
+				<div id="collapseOne" class="panel-collapse collapse in">
+					<div class="panel-body">
+						<div style="width:100%;padding:3px;border:1px solid black;border-radius:5px">
+							<div style="margin-top:10px">
+								<img src="../images/star.png" style="float:left;margin-top:-5px"/>
+								<p>您有二项来自资产管理员的链接申请，<a href='#' data-toggle='modal' data-target='#modal-request'>请处理</a></p>
+								<p style="float:right">2014-6-1</p>
+							</div>
+							
+							<p style="margin-left:25px">*刷卡流水记录,开放权限变更;可落地资产;重要程度:<span style="color:red">紧急</span></p>
+							
+							<p style="margin-left:25px">*危险品运输车辆,同步方式审核;可落地资产;重要程度:<span style="color:red">紧急</span></p>
+
+						</div>
+						<div style="margin:20px 0 5px 30px;">
+							<p style="display:inline-block">您有一项来自资产管理员的链接申请，已处理</p><p style="float:right">2014-3-1</p>
+						</div>
+						<div style="margin:5px 0 5px 30px;">
+							<p style="display:inline-block">您有一项来自资产管理员的链接申请，已处理</p><p style="float:right">2014-2-1</p>
+						</div>
+						
+					</div>
+				</div>
+			</div>
+			<div class="panel panel-default">
+				<div class="panel-heading">
+					<h4 class="panel-title">
+						<a data-toggle="collapse" data-parent="#accordion" href="#collapseTwo">注册数据资产</a>
+					</h4>
+				</div>
+				<div id="collapseTwo" class="panel-collapse collapse in">
+					<div class="panel-body">
+
+						<div style="margin-bottom:20px">
+							<a style="float:right" href="home.html" class="btn btn-success">注册新资产</a>
+							<a style="float:right" href="../myReg/step1.html" class="btn btn-primary">注册新资产方案2</a>
+						</div>
+						<div id="list-div" class="div-center" style="padding-top:20px;">
+							<table id="example" class="display" cellspacing="0" width="100%">
+								<thead>
+									<tr>
+										<th>序号</th>
+										<th>类别</th>
+										<th>数据集</th>
+										<th>权限配置</th>
+										<th>连接状态</th>
+										<th>操作</th>
+									</tr>
+								</thead>
+								<tfoot>
+									<tr>
+										<th>序号</th>
+										<th>类别</th>
+										<th>数据集</th>
+										<th>权限配置</th>
+										<th>连接状态</th>
+										<th>操作</th>
+									</tr>
+								</tfoot>
+
+								<tbody></tbody>
+							</table>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+
+		<!-- Modal -->
+		<div class="modal fade" id="modal-request" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+		  <div class="modal-dialog">
+		    <div class="modal-content">
+		      <div class="modal-header">
+		        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+		        <h4 class="modal-title" id="myModalLabel">Request from XXX</h4>
+		      </div>
+		      <div class="modal-body">
+		        <h1>资产管理员的申请</h1>
+				<table class="table table-striped">
+				  	<thead>
+				        <tr>
+				        	<th>所属类别</th> 
+				        	<th>数据集</th> 
+				        	<th>权限配置</th> 
+				        	<th>连接状态</th> 
+				        	<th>操作</th>
+				        	<th>申请详情</th>
+				        </tr>
+				    </thead>
+				    <tbody>
+				        <tr class="clickable" data-toggle="collapse" id="1" data-target=".collapsed1">
+				            <td>卫生</td>
+				            <td>刷卡流水记录</td>
+				            <td>仅结构</td>
+				            <td>已连接</td>
+				            <td><a href='#' data-toggle='modal' data-target='#modal-stop'>断开</a></td>
+				            <td><a href="#" data-toggle="collapse" data-target=".collapsed1">查看</a></td>
+				        </tr>
+				        <tr class="collapse out budgets collapsed1">
+				            <td colspan="6"><div>
+				            	<div class="child-row" style="display:inline-block;padding:5px">
+				            		<div style="display:inline">
+					            		<p style="font-size:24px;font-weight:600;margin-top:10px">刷卡流水记录</p>
+					            		<div style="float:right;margin-top:-50px">
+					            			<button type="button" class="btn btn-success btn-accept">通过</button>
+					            			<button type="button" class="btn btn-danger btn-reject">拒绝</button>
+					            		</div>
+					            		<div style="border:1px solid red" class="div-hide div-reject">
+					            			<form class="form-horizontal" role="form" style="margin-top:10px">
+											  <div class="form-group">
+											    <label for="input-reason1" class="col-sm-2 control-label">拒绝原因</label>
+											    <div class="col-sm-10">
+											    <textarea class="form-control" id="input-reason1" placeholder="......"></textarea>
+											    </div>
+											  </div>
+											  <div class="form-group">
+											    <div class="col-sm-offset-2 col-sm-10">
+											      <a class="btn btn-default btn-sure-reject">确认拒绝</a>
+											      <a class="btn btn-default btn-cancel-reject">取消拒绝</a>
+											    </div>
+											  </div>
+											</form>
+					            		</div>
+				            		</div>
+				            		
+				            		<div>
+				            			<span></span>
+				            			<span style="padding:5px 20px 5px 0px">存储介质: ORCALE</span>
+				            			<span style="padding:5px 20px 5px 0px">资源大类: 卫生</span>
+				            			<span style="padding:5px 20px 5px 0px">服务器地址: 192.168.1.1</span>
+				            			<span style="padding:5px 20px 5px 0px">用户名: 哈哈</span>
+				            		</div>
+
+				            		<div class="panel panel-default">
+									    <div class="panel-heading">
+									      <h4 class="panel-title">
+									          由仅引用到可落地
+									      </h4>
+									    </div>
+									    <div class="panel-body">
+									    	<p>计划执行：每月30日 00：00开始</p>
+									    	<hr/> 
+									    	<p>增量方式：触发器</p>   
+									    </div>
+									  </div>
+				            	</div>
+
+				            </div></td>
+				        </tr>
+				        
+				        <tr class="clickable" id="2" data-toggle="collapse" data-target=".collapsed2">
+				            <td>交通</td>
+				            <td>危险品运输车辆</td>
+				            <td>落地</td>
+				            <td>已断开</td>
+				            <td><a href='#' data-toggle='modal' data-target='#modal-edit'>编辑</a></td>
+				            <td><a href="#" data-toggle="collapse" data-target=".collapsed2">查看</a></td>
+				        </tr>
+				        <tr class="collapse out budgets collapsed2">
+				            <td colspan="6"><div>
+				            	<div class="child-row">
+				            		<div class="child-row" style="display:inline-block;padding:5px">
+				            		<div style="display:inline">
+					            		<p style="font-size:24px;font-weight:600;margin-top:10px">刷卡流水记录</p>
+					            		<div style="float:right;margin-top:-50px">
+					            			<button type="button" class="btn btn-success btn-accept">通过</button>
+					            			<button type="button" class="btn btn-danger btn-reject">拒绝</button>
+					            		</div>
+
+					            		<div style="border:1px solid red"  class="div-hide div-reject">
+					            			<form class="form-horizontal" role="form" style="margin-top:10px">
+											  <div class="form-group">
+											    <label for="input-reason2" class="col-sm-2 control-label">拒绝原因</label>
+											    <div class="col-sm-10">
+											    	<textarea  class="form-control" id="input-reason2" placeholder="......"></textarea>
+											    </div>
+											  </div>
+											  <div class="form-group">
+											    <div class="col-sm-offset-2 col-sm-10">
+											      <a class="btn btn-default btn-sure-reject">确认拒绝</a>
+											      <a class="btn btn-default btn-cancel-reject">取消拒绝</a>
+											    </div>
+											  </div>
+											</form>
+					            		</div>
+				            		</div>
+				            		
+				            		<div>
+				            			<span></span>
+				            			<span style="padding:5px 20px 5px 0px">存储介质: HBASE</span>
+				            			<span style="padding:5px 20px 5px 0px">资源大类: 卫生</span>
+				            			<span style="padding:5px 20px 5px 0px">服务器地址: 192.168.1.1</span>
+				            			<span style="padding:5px 20px 5px 0px">用户名: 哈哈</span>
+				            		</div>
+
+				            		<div class="panel panel-default">
+									    <div class="panel-heading">
+									      <h4 class="panel-title">
+									          同步方式
+									      </h4>
+									    </div>
+									    <div class="panel-body">
+									    	<p>HBASE路径：hbase://111.111.111.111</p>
+									    	<hr/> 
+									    	<p>ZooKeeper端口：2181</p>   
+									    </div>
+									  </div>
+				            	</div>
+				            	</div>
+				            </div></td>
+				        </tr>
+				        
+				    </tbody>
+				</table>
+		      </div>
+		      <div class="modal-footer">
+		        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+		      </div>
+		    </div>
+		  </div>
+		</div>
+
+
+
+
+
+
+		<!-- Modal -->
+		<div class="modal fade" id="modal-stop" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+		  <div class="modal-dialog">
+		    <div class="modal-content">
+		      <div class="modal-header">
+		        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+		        <h4 class="modal-title" id="myModalLabel">Modal title</h4>
+		      </div>
+		      <div class="modal-body">
+		        The data connection has stoped 
+		      </div>
+		      <div class="modal-footer">
+		        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+		      </div>
+		    </div>
+		  </div>
+		</div>
+		<!-- Modal -->
+		<div class="modal fade" id="modal-delete" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+		  <div class="modal-dialog">
+		    <div class="modal-content">
+		      <div class="modal-header">
+		        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+		        <h4 class="modal-title" id="myModalLabel">Modal title</h4>
+		      </div>
+		      <div class="modal-body">
+		        The data connection has deleted 
+		      </div>
+		      <div class="modal-footer">
+		        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+		      </div>
+		    </div>
+		  </div>
+		</div>
+		<!-- Modal -->
+		<div class="modal fade" id="modal-conn" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+		  <div class="modal-dialog">
+		    <div class="modal-content">
+		      <div class="modal-header">
+		        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+		        <h4 class="modal-title" id="myModalLabel">Modal title</h4>
+		      </div>
+		      <div class="modal-body">
+		        The data connection has connected 
+		      </div>
+		      <div class="modal-footer">
+		        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+		      </div>
+		    </div>
+		  </div>
+		</div>
+		<!-- Modal -->
+		<div class="modal fade" id="modal-edit" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+		  <div class="modal-dialog">
+		    <div class="modal-content">
+		      <div class="modal-header">
+		        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+		        <h4 class="modal-title" id="myModalLabel">Modal title</h4>
+		      </div>
+		      <div class="modal-body">
+		        The data connection has edited 
+		      </div>
+		      <div class="modal-footer">
+		        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+		      </div>
+		    </div>
+		  </div>
+		</div>
+
+
+		<div class="footer">
+			<p>© Bryce 2014</p>
+		</div>
+
+	</div>
+	<!-- JQuery -->
+	<script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+	<script src="http://code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
+
+	<!-- Latest compiled and minified JavaScript -->
+	<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+	<script type="text/javascript" src="../plugins/bootstrap-switch/js/bootstrap-switch.min.js"></script>
+	<script type="text/javascript" src="http://cdn.datatables.net/1.10.2/js/jquery.dataTables.min.js"></script>
+	<script type="text/javascript">
+	$(function(){
+		
+		var table = $('#example').DataTable(); 
+		
+		var data = {
+			"kind": ["卫生","交通","工商","社保","司法"],
+			"set":[
+				["刷卡流水记录","诊疗记录", "慢性病分析", "影响资料库"],
+				["危险品运输车辆", "公交线路", "违章记录", "轨交记录", "违章照片"],
+				["市场主题信息", "市场主题互联网动态", "违规欺诈记录"],
+				["养老保险", "医疗保险缴费情况", "违规信息"],
+				["线索征集", "侦察信息", "审判信息"]
+			],
+			"level":["仅结构","落地","引用"],
+			"state":["已断开","已连接"],
+			"oper":["<a href='#' data-toggle='modal' data-target='#modal-delete'>删除</a> <a href='#' data-toggle='modal' data-target='#modal-conn'>链接</a> <a href='../myReg/step4.html?type=mysql&cuteinfo=no&level=yes&edit=true'>编辑</a>", "<a href='#' data-toggle='modal' data-target='#modal-stop'>断开</a>"]
+		}
+		var counter = 1;
+		for(var i=0;i<data.kind.length;i++){
+			for(var j=0;j<data.set[i].length;j++){
+				var arr = [];
+				arr.push(counter++);
+				arr.push(data.kind[i]);
+				arr.push("<a href='../asset/detail.html'>"+data.set[i][j]+"</a>");
+				arr.push(getRandom(data.level))
+				var state = getRandom(data.state);
+				arr.push(state);
+				if(state=="已断开") arr.push(data.oper[0]);
+				if(state=="已连接") arr.push(data.oper[1]);
+
+				table.row.add( arr ).draw(); 	
+			}
+		}
+		var QueryString = function () {
+		  // This function is anonymous, is executed immediately and 
+		  // the return value is assigned to QueryString!
+		  var query_string = {};
+		  var query = window.location.search.substring(1);
+		  var vars = query.split("&");
+		  for (var i=0;i<vars.length;i++) {
+		    var pair = vars[i].split("=");
+		    	// If first entry with this name
+		    if (typeof query_string[pair[0]] === "undefined") {
+		      query_string[pair[0]] = pair[1];
+		    	// If second entry with this name
+		    } else if (typeof query_string[pair[0]] === "string") {
+		      var arr = [ query_string[pair[0]], pair[1] ];
+		      query_string[pair[0]] = arr;
+		    	// If third or later entry with this name
+		    } else {
+		      query_string[pair[0]].push(pair[1]);
+		    }
+		  } 
+		    return query_string;
+		} ();
+
+		if(QueryString.c && QueryString.name){
+				var arr = [];
+				arr.push(counter++);
+				arr.push(QueryString.c);
+				arr.push("<a href='../asset/detail.html'>"+QueryString.name+"</a>");
+				arr.push(getRandom(data.level))
+				var state = getRandom(data.state);
+				arr.push(state);
+				if(state=="已断开") arr.push(data.oper[0]);
+				if(state=="已连接") arr.push(data.oper[1]);
+
+				table.row.add( arr ).draw(); 	
+		}
+		////////////////////////////////////////////////////////////////
+		//  set filter
+		////////////////////////////////////////////////////////////////
+		$('#example tfoot th').each( function () { 
+			var title = $('#example thead th').eq( $(this).index() ).text();
+			if(getColType(title) == "select" || title=="序号") return; 
+			$(this).html( '<input style="width:100%" type="text" placeholder="Search" />');
+		});
+		table.columns().eq( 0 ).each( function ( colIdx ) { 
+			$( 'input', table.column( colIdx ).footer() ).on( 'keyup change', function () {
+			 table.column( colIdx ) .search( this.value ) .draw(); 
+			}); 
+		}); 
+		$("#example tfoot th").each( function ( i ) {
+			var title = $('#example thead th').eq( $(this).index() ).text();
+			if(getColType(title) == "text" || title=="操作" ) return;
+
+		 	var select = $('<select><option value=""></option></select>') .appendTo( $(this).empty() )
+		 	.on( 'change', function () {
+		 	 	var val = $(this).val(); 
+		 	 	table.column( i ) .search( val ? '^'+$(this).val()+'$' : val, true, false ) .draw(); 
+		 	 } ); 
+		 	table.column( i ).data().unique().sort().each( function ( d, j ) {
+		 	 	select.append( '<option value="'+d+'">'+d+'</option>' ) 
+		 	 } ); 
+		 } );
+
+
+		////////////////////////////////////////////////////////////////
+		//  some functions
+		////////////////////////////////////////////////////////////////
+		function getColType(title){
+			if(title == "类别" || title == "权限配置" || title == "连接状态" || title == "操作")
+				return "select"
+			else return "text";
+		}
+		function getRandom(arr){
+			return arr[Math.floor((Math.random() * arr.length))];
+		}
+	})
+	
+	$(function(){
+		$(".btn-reject").click(function(){
+			$(this).parent().next().css("display","block");
+		})
+		$(".btn-cancel-reject").click(function(){
+			$(this).parent().parent().parent().parent().css("display","none");
+		})
+		$(".btn-sure-reject").click(function(){
+			var td1 = $(this).parents(".collapse")
+			var td0 = td1.prev();
+			td1.css("display","none");
+			td0.css("display","none")
+		})
+		$(".btn-accept").click(function(){
+			var td1 = $(this).parents(".collapse")
+			var td0 = td1.prev();
+			td1.css("display","none");
+			td0.css("display","none")
+		})
+	})
+
+	</script>
+</body>
+</html>

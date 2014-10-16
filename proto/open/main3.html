@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>欢迎使用大数据管理平台</title>
+        <link rel="stylesheet" type="text/css" href="../css/custom.css"/>
+        <link rel="stylesheet" type="text/css" href="../css/isotope.css"/>
+        <link rel="stylesheet" type="text/css" href="../css/flippant.css"/>
+        <!-- Latest compiled and minified CSS -->
+	<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+
+	<!-- Optional theme -->
+	<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
+
+	<!-- ZTree -->
+	<link rel="stylesheet" href="../plugins/zTree_v3/css/demo.css" type="text/css">
+	<link rel="stylesheet" href="../plugins/zTree_v3/css/zTreeStyle/zTreeStyle.css" type="text/css">
+
+	<!-- menu -->
+	<link rel="stylesheet" type="text/css" href="../plugins/jQuery-contextMenu/src/jquery.contextMenu.css">
+
+	<link rel="stylesheet" type="text/css" href="../css/style.css">
+
+        <style>
+			.element .symbol {
+				color: #fff;
+				font-size: 12px;
+				left: 5px;
+				top: 40px;
+				font-weight: bold;
+				word-wrap: break-word;
+				word-break:break-all;
+			}
+			
+			.element.large .symbol {
+			    font-size: 12px;
+			}
+			
+			.element .name {
+				color: #fff;
+			    top: 80px;
+			    font-size: 12px;
+			    font-family:"微软雅黑";
+			    left: 5px;
+			}
+			
+			.element.large .name {
+			    font-size: 12px;
+			}
+			
+			.element .table-info-content {
+				color: #fff;
+				font-size: 12px;
+				top: 100px;
+				font-family: '微软雅黑';
+				width: 100%;
+			}
+			
+			.table-info-content *{
+				position: relative;
+			}
+			
+			.bs-glyphicons .glyphicon-class {
+				display: block;
+				text-align: center;
+				word-wrap: break-word;
+			}
+		</style>
+		<script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+        </head>
+        <!-- Bootstrap core CSS -->
+        <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+        </head>
+        <body>
+            <div class="container">
+                <div>
+                    <!--左边工具栏-->
+                    <div class="toolList" style="width:10px;left:905px;">
+                    <script type="text/javascript">
+                    var tree=false;
+                    function change(){
+	                    if(!tree){
+	                    	$('#tree').css('display','block');
+	                    	$('#main').css('display','none');
+	                    	$('#meta').css('display','none');
+	                    	tree=true;
+	                    }else{
+	                    	$('#tree').css('display','none');
+	                    	$('#main').css('display','block');
+	                    	$('#meta').css('display','block');
+	                    	tree=false;
+	                    }	
+                    }
+                    
+                    </script>
+                       <button type="button" class="btn btn-default" style="margin: 5px;" onclick="change()">
+                            <span class="glyphicon glyphicon-log-out"></span>
+                        </button>
+                    </div>
+                </div>
+                <!--/左边工具栏-->
+                <div id="tree" style="display:none">
+					<div class="content_wrap" >
+						<div class="zTreeDemoBackground left">
+							<ul id="treeDemo" class="ztree" style="height:500px;"></ul>
+						</div>
+					</div>
+                </div>
+                <div id="meta" style="margin-left:-100px;width:36%;float:left;">
+					<div style="background-color:#BBB;">
+						<div style="width:90%;padding-bottom:20px">							
+							<table id="metatable" class="table table-striped" style="margin-left:5%;background:#DDD">
+								<tr><td>Resource Type</td><td>mysql</td></tr>
+								<tr><td>Metadata Created Date</td><td>2014-1-1</td></tr>
+								<tr><td>Metadata Updated Date</td><td>2014-1-2</td></tr>
+								<tr><td>Publisher</td><td>tongji</td></tr>
+								<tr><td>Identifier</td><td>sse</td></tr>
+								<tr><td>Maintainer</td><td>bryce</td></tr>
+								<tr><td>Maintainer Email</td><td>123@123.com</td></tr>
+								<tr><td>Access Level</td><td>public</td></tr>
+								<tr><td>Accrualperiodicity</td><td>5</td></tr>
+								<tr><td>Bureaucode</td><td>1111</td></tr>
+								<tr><td>Datadictionary</td><td>pen peo</td></tr>
+								<tr><td>Harvest Object Id</td><td>#123</td></tr>
+								<tr><td>Harvest Source Id</td><td>#124</td></tr>
+								<tr><td>Harvest Source Title</td><td>#125</td></tr>
+								<tr><td>Issued</td><td>NO</td></tr>
+								<tr><td>Modified</td><td>NO</td></tr>
+								<tr><td>Programcode</td><td>hello world</td></tr>
+								<tr><td>References</td><td>http://xxx.xxx</td></tr>
+								<tr><td>Source Datajson Identifier</td><td>#eee</td></tr>
+								<tr><td>Source Hash</td><td>#(xxxx)</td></tr>
+								<tr><td>Temporal</td><td>hello</td></tr>
+							</table>
+						</div>
+					</div>
+				</div>
+                <div id="main" class="mainCanvas" style="width:75%;padding-left:20px;">
+                    <!--
+				<div class="element"><p class="number"><span class="glyphicon glyphicon-info-sign table-info" style="color: #fff" /></p><h3 class="symbol">TB_SF_STUDENT</h3><h2 class="name">学生表</h2><p class="weight"></p><div class="table-info-content hidden" ><table class="table" ><tr><td class="table-title">TB_SF_STUDENT</td><td class="table-title comment">学生表</td></tr><tr><td class="table-column">ID</td><td class="table-column comment">主键</td></tr><tr><td class="table-column">NAME</td><td class="table-column comment">名称</td></tr></table></div></div>
+				-->
+                </div>
+            </div>
+            <!-- /.container -->
+
+            
+            <script src="../js/jquery.isotope.min.js"></script>
+            <script type="text/javascript" src="../js/d3.js"></script>
+            <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+            <script src="../js/flippant.js"></script>
+            <script src="../js/tables.js"></script>
+			<script type="text/javascript" src="../plugins/mindmup-editabletable.js"></script>
+
+            <script type="text/javascript">
+			$(function() {
+				var width = 560;
+				var height = document.documentElement.clientHeight-20;
+				$("#tree").css('height',height);
+				var $container = $('.mainCanvas');
+				$container.css({
+					width:width,
+					height:height
+				})
+				var len = tables.length;
+				for(var i = 0; i < len; i++) {
+					var table = tables[i]
+					var elementStr = ''
+					elementStr=elementStr+('<div class="element "> <p class="number"> <span class="glyphicon glyphicon-info-sign table-info" style="color: #fff" /> </p> <h3 class="symbol">' + table.name + '</h3> <h2 class="name">' + table.comment + '</h2> <p class="weight"></p>');
+					elementStr=elementStr+('<div class="table-info-content hidden" > <table class="table" >');
+					var columns = table.columns;
+					var cLen = columns.length;
+					for(var j=0;j
+                            <cLen;j++){
+						var column = columns[j];
+						elementStr=elementStr+('<tr> <td class="table-title">'+column.name+'</td> <td class="table-title comment">'+column.comment+'</td> <td class="table-title comment">'+column.dataType+'</td> </tr>');
+					}
+					elementStr=elementStr+'</table> </div> </div>'
+					$container.append(elementStr);
+				}
+
+				$container.isotope({
+					itemSelector : '.element'
+				});
+								
+		  		
+		  		$('.table-info').click(function(){	
+		  			var flipper = this.parentNode.parentNode		  				  			
+			        $(flipper).toggleClass('large');		  				  			
+			        $(flipper).find('.table-info-content').toggleClass('hidden');			        
+			        $(flipper).find('.table-info-content').editableTableWidget();
+			        $container.isotope('reLayout');		  			
+		  		});
+		  		
+		  		return;
+		  		var key = 'filter';
+		  		var value= '';
+		  		options[ key ] = value;
+		  		$container.isotope( options );
+
+			});
+
+		
+                </script>
+    <!-- JQuery -->
+	<!-- Latest compiled and minified JavaScript -->
+	<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+
+	<!-- zTree -->
+	<script type="text/javascript" src="../plugins/zTree_v3/js/jquery.ztree.core-3.5.js"></script>
+	<script type="text/javascript" src="../plugins/zTree_v3/js/jquery.ztree.excheck-3.5.js"></script>
+	<script type="text/javascript" src="../plugins/zTree_v3/js/jquery.ztree.exedit-3.5.js"></script>
+	
+	<script type="text/javascript">
+
+		var setting = {
+			view: {
+				dblClickExpand: false
+			}
+		};
+
+		var zNodes =[
+			{id:2, name:"Tables", open:true,
+				children:[
+					   {id:21, name:"事故信息记录表", open: true,
+					        children:[
+					        {id:211, name:"Columns",open: true, children:[]},
+					        {id:212, name:"Keys",open: true,children:[{id:2121, name:"Key_1"}]}
+					   ]},
+					   {id:22, name:"交通运输设备"},
+					   {id:23, name:"供货商信息"},
+					   {id:24, name:"保养信息表"},
+					   {id:25, name:"固定资产主件"},
+					   {id:26, name:"国有资产产权登记"},
+					   {id:27, name:"年度定额费用"},
+					   {id:28, name:"房屋及建筑物"},
+					   {id:29, name:"数据词典"},
+					   {id:30, name:"文书材料信息"}
+				]}
+  	 	];
+
+  	 	function makeNodes(){
+  	 		var tableNames = ["事故信息记录表", "交通运输设备", "供货商信息", "保养信息表", "固定资产主件", "国有资产产权登记", "年度定额费用", "房屋及建筑物","数据词典", "文书材料信息"]
+  	 		var colunms1 = [
+  	 		"事故信息", "车辆信息", "事故现场", "事故发生", "肇事地点", "肇事人", "后果分类", "主体分类", "事故责任", "事故描述", "备注"
+  	 		]
+  	 		var database = {id:1, name:"Tables", open:true, children:[]};
+  	 		for(var i=0;i<9;i++){
+  	 			var id = 10 + i;
+  	 			var table = {id:10+i, name:tableNames[i], children:[
+  	 				{id:20+i, name:"Columns",open: true, children:[]},
+					{id:30+i, name:"Keys",open: true,children:[{id:300+i, name:"Key_1", noR:true}]}
+  	 			]};
+  	 			if(i==0){
+  	 				table.open = true;
+  	 				for(var j=0;j<colunms1.length;j++)
+  	 				table.children[0].children.push({id:(20+i)*10+j, name:colunms1[j], noR: true})
+  	 			}
+  	 			database.children.push(table);
+  	 		}
+  	 		return database;
+  	 	}
+
+		
+		var zTree;
+		$(document).ready(function(){
+			$("#metatable").editableTableWidget();
+			$.fn.zTree.init($("#treeDemo"), setting, makeNodes());
+			zTree = $.fn.zTree.getZTreeObj("treeDemo");
+		});
+	</script>
+  </body>
+</html>
