@@ -65,6 +65,9 @@
 		  color: #000;
 		  text-decoration: none;
 		}
+		.sidenav>li>a:active{
+		  background-color: #EEE;
+		}
 		.shadow-out {
 		  -moz-box-shadow:    3px 3px 5px 6px #ccc;
 		  -webkit-box-shadow: 3px 3px 5px 6px #ccc;
@@ -130,14 +133,12 @@
 				width: 57px;
 				display: block;
 			}
-			.fixcart>ul{
+			.fixcart>div{
 				top:30px;
 				left:-40px;
 				list-style-type: none;
 			}
-			.dropdown:hover .dropdown-menu {
-			    display: block;
-			}
+			
 	</style>
 	<script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
 	<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
@@ -159,7 +160,7 @@
 			</div>
 		</div>
 		<div style="float:right;color:#FFF;margin-right:150px;" >
-	      开放管理员 <img src="../images/ic_user.png" height="20px" alt="icon"><span style="color:#94d500">admin </span><a href="../index.html" class="btn btn-sm" style="background-color:#94d500;color:white">退出</a>
+	      租户 <img src="../images/ic_user.png" height="20px" alt="icon"><span style="color:#94d500">admin </span><a href="../index.html" class="btn btn-sm" style="background-color:#94d500;color:white">退出</a>
 	    </div>
 	</div>
 	<div class="location">
@@ -189,9 +190,11 @@
 				</div>
 				<div class="fixcart">
 				    <button id="cart-btn" style="height:31px;" type="button" data-toggle="dropdown" class="btn btn-default btn-sm dropdown-toggle">购物车 <span class="caret"></span></button>
-				    <ul class="dropdown-menu" id="cart" style="min-width:140px;">
-				        <li><a href="#">测试表</a></li>
-				    </ul>
+				    <div class="dropdown-menu">
+				    	<div id="cart" class="list-group" style="padding:5px">
+						</div>
+					    <button style="float:right;margin:5px;" class="btn btn-sm btn-success">立即申请</button>
+				    </div>
 				</div>
 				
 				<div id="detail" class="panel shadow-out" style="overflow:scroll;">
@@ -565,7 +568,7 @@
 			
 	  		$('.table-add').click(function(){
 	  			var x = $(this).parent().parent().find('h2').text();
-	  			$('#cart').append('<li  class="divider"></li><li><a href="#"> '+x +' </a></li>')
+	  			$('#cart').append('<a href="#" class="list-group-item"> '+x +' </a>')
 	  			alert(x+' 添加到购物车')
 	  			$('.dropdown-menu').dropdown();
 	  		})
