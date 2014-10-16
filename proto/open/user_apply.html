@@ -193,7 +193,7 @@
 				    <div class="dropdown-menu">
 				    	<div id="cart" class="list-group" style="padding:5px">
 						</div>
-					    <button style="float:right;margin:5px;" class="btn btn-sm btn-success">立即申请</button>
+					    <button id="user-apply-btn" style="float:right;margin:5px;" class="btn btn-sm btn-success">立即申请</button>
 				    </div>
 				</div>
 				
@@ -658,6 +658,9 @@
 		$('#cart-btn').click(function(){
 			$('.dropdown-menu').dropdown();
 			return false;
+		})
+		$("#user-apply-btn").click(function(){
+			alert("申请已经发出，请耐心等待");
 		})
 	})
 	</script>
