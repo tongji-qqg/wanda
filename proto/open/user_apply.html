@@ -184,6 +184,13 @@
 						<li><a href="../user/page5.html"><img width="20px" height="20px;" src="../images/d_analysis.png" alt=""> 分析利用	</a></li>
 						<li><a href="#"><img width="20px" height="20px;" src="../images/share.png" alt=""> 我的分享 </a></li>
 						<li><a href="#"><img width="20px" height="20px;" src="../images/trash.png" alt=""> 回收站 </a></li>
+						<li>
+							<div style="width:120px;height:5px;background:#DDD;display:block;margin-top:100px;">
+								<div style="width:20px;background:blue;height:5px;float:left"></div>
+								<div style="width:80px;background:red;height:5px;"></div>
+								<div style="margin-top:10px;">10G/80G/250G  扩容</div>
+							</div>
+						</li>
 					</ul>	
 				</div>
 				<div id="main" class="mainCanvas" style="float:left">
@@ -220,6 +227,9 @@
                         </button>
                         <button type="button" class="btn btn-default" style="margin: 5px;" onclick="change()">
                             <span class="glyphicon glyphicon-floppy-open"></span>
+                        </button>      
+                        <button id="buy-all" type="button" class="btn btn-default" style="margin: 5px;" title="全部购买">
+                            <span class="glyphicon glyphicon-shopping-cart"></span>
                         </button>                        
                     </div>
 	                <!--/左边工具栏-->
@@ -313,27 +323,27 @@
 				var half     =  svg.attr('width') / 3;
 				var typeRect = svg.selectAll(".typeRect").data(data).enter().append("g");
 				typeRect.append("rect")
-				.attr("width",rectWidth-30)
-				.attr("height",90)
-				.attr("x",function(d,i){var x=i*rectWidth % half;area[i]={};area[i].x = x;return x;})
-				.attr("y",function(d,i){var y=Math.floor( i*rectWidth / half )* 140 + 30;area[i].y=y;return y;})
+				.attr("width",rectWidth-15)
+				.attr("height",60)
+				.attr("x",function(d,i){var x=i*rectWidth + 10;area[i]={};area[i].x = x;return x;})
+				.attr("y",function(d,i){var y=0;area[i].y=y;return y;})
 				.style("fill", function(d) {return color(d.type);});
 				//typeRect.append("text").style("font-size", 12).text(function(d) {return d.name;}).style("fill", "#fff").style("text-anchor", "middle").style("font-family", "Arial").attr("x",function(d,i){return i*rectWidth+rectWidth/2}).attr("y",15);
 				typeRect.append("image")
-				   .attr('x',function(d,i){return i*rectWidth % half + 10})
-				   .attr('y',function(d,i){return Math.floor( i*rectWidth / half )* 140 + 35})
-				   .attr('width', 60)
-				   .attr('height', 60)
+				   .attr('x',function(d,i){return i*rectWidth + 30})
+				   .attr('y',function(d,i){return 10})
+				   .attr('width', 30)
+				   .attr('height', 30)
 				   .attr("xlink:href",function(d) {return d.image;})
 
 				typeRect.append("text")
-					.style("font-size", 12)
+					.style("font-size", 10)
 					.text(function(d) {return d.name;})
 					.style("fill", "#fff")
 					.style("text-anchor", "middle")
 					.style("font-family", "Arial")
-					.attr('x',function(d,i){return i*rectWidth % half + 40})
-					.attr('y',function(d,i){return Math.floor( i*rectWidth / half )* 140 + 110});
+					.attr('x',function(d,i){return i*rectWidth + 45})
+					.attr('y',function(d,i){return 55});
 
 				typeRect.on('click',function(e,i){
 					//filterType(i);
@@ -355,13 +365,14 @@
 				}				
 			}			
 		}	
-		//renderType(typeData);
+		renderType(typeData);
 	})()  
 		
 		
 				
 	</script>
 	<script type="text/javascript">
+	var g_node;
 	(function(){
 		var dataSource = {
 			nodes:[{
@@ -424,6 +435,7 @@
 				.data(data.nodes).enter()
 				.append("circle")
 				.attr("class", "node")
+				.attr("data-title",function(d){return d.name})
 				.attr("r", function(d){return d.size;})
 				.style("fill", function(d) {return color(d.type);})
 				.classed('sourceType',function(d){return 1==d.sourceType })
@@ -460,6 +472,7 @@
 					//$("body").load('main3.html');
 					//
 					//$('.mainCanvas').animate({width:'toggle'});
+					g_node = this;
 					clicknode();
 					return false;
 				});
@@ -661,6 +674,11 @@
 		})
 		$("#user-apply-btn").click(function(){
 			alert("申请已经发出，请耐心等待");
+		})
+		$("#buy-all").click(function(){
+			var x = $(g_node).attr('data-title')
+			$('#cart').append('<a href="#" class="list-group-item"> '+x +' </a>')
+			alert(x + "添加到购物车");
 		})
 	})
 	</script>
