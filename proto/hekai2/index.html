@@ -82,8 +82,9 @@
 			<div class="panel panel-default">
 				<div class="panel-heading">
 					<h4 class="panel-title">
-						<a data-toggle="collapse" data-parent="#accordion" href="#collapseOne">链接申请</a>
+						<a data-toggle="collapse" data-parent="#accordion" href="#collapseOne">申请审核</a>
 					</h4>
+					<div style="float:right;margin-top:-18px;"><a href='#' data-toggle='modal' data-target='#modal-request'>更多>></a></div>
 				</div>
 				<div id="collapseOne" class="panel-collapse collapse in">
 					<div class="panel-body">
@@ -94,18 +95,57 @@
 								<p style="float:right">2014-6-1</p>
 							</div>
 							
-							<p style="margin-left:25px">*刷卡流水记录,开放权限变更;可落地资产;重要程度:<span style="color:red">紧急</span></p>
-							
-							<p style="margin-left:25px">*危险品运输车辆,同步方式审核;可落地资产;重要程度:<span style="color:red">紧急</span></p>
-
+							<table class="table" style="margin-left:25px;width:60%">
+							<tr>
+								<td>*刷卡流水记录 </td>
+								<td>开放权限变更 </td>
+								<td>可落地资产 </td>
+								<td>重要程度:<span style="color:red">紧急</span></td>
+							</tr>
+							<tr>
+								<td>*危险品运输车辆 </td>
+								<td>同步方式审核 </td>
+								<td>可落地资产 </td>
+								<td>重要程度:<span style="color:red">紧急</span></td>
+							</tr>
+							</table>
 						</div>
-						<div style="margin:20px 0 5px 30px;">
-							<p style="display:inline-block">您有一项来自资产管理员的链接申请，已处理</p><p style="float:right">2014-3-1</p>
+				
+						<div style="width:100%">
+							<table class="table table-striped" style="width:60%;margin-left:25px">
+							  	<thead>
+							        <tr>
+							        	<th>所属类别</th> 
+							        	<th>数据集</th> 
+							        	<th>权限配置</th> 
+							        	<th>申请结果</th> 
+							        	<th>申请详情</th>
+							        </tr>
+							    </thead>
+							    <tbody>
+							        <tr>
+							            <td>工商</td>
+							            <td>市场主题互联网动态</td>
+							            <td>仅结构</td>
+							            <td>拒绝</td>
+							            <td><a href='#' data-toggle='modal' data-target='#modal-request-history'>查看</a></td>
+							        </tr>
+
+							        
+							        <tr>
+							            <td>社保</td>
+							            <td>医疗保险缴费情况</td>
+							            <td>落地</td>
+							            <td>允许</td>
+							            <td><a href='#' data-toggle='modal' data-target='#modal-request-history'>查看</a></td>
+							        </tr>
+							        
+							    </tbody>
+							</table>
 						</div>
 						<div style="margin:5px 0 5px 30px;">
-							<p style="display:inline-block">您有一项来自资产管理员的链接申请，已处理</p><p style="float:right">2014-2-1</p>
+							<p style="display:inline-block"><a href='#' data-toggle='modal' data-target='#modal-request-history'> 更多>> </a></p>
 						</div>
-						
 					</div>
 				</div>
 			</div>
@@ -308,9 +348,125 @@
 		  </div>
 		</div>
 
+		<!-- Modal -->
+		<div class="modal fade" id="modal-request-history" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+		  <div class="modal-dialog">
+		    <div class="modal-content">
+		      <div class="modal-header">
+		        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+		        <h4 class="modal-title" id="myModalLabel">Request History</h4>
+		      </div>
+		      <div class="modal-body">
+		        <h1>资产管理员的申请</h1>
+				<table class="table table-striped">
+				  	<thead>
+				        <tr>
+				        	<th>所属类别</th> 
+				        	<th>数据集</th> 
+				        	<th>权限配置</th> 
+				        	<th>申请结果</th> 
+				        	<th>申请详情</th>
+				        </tr>
+				    </thead>
+				    <tbody>
+				        <tr class="clickable" data-toggle="collapse" id="1" data-target=".collapsed3">
+				            <td>工商</td>
+				            <td>市场主题互联网动态</td>
+				            <td>仅结构</td>
+				            <td>拒绝</td>
+				            <td><a href="#" data-toggle="collapse" data-target=".collapsed3">查看</a></td>
+				        </tr>
+				        <tr class="collapse out budgets collapsed3">
+				            <td colspan="6"><div>
+				            	<div class="child-row" style="display:inline-block;padding:5px">
+				            		<div style="display:inline">
+					            		<p style="font-size:24px;font-weight:600;margin-top:10px">市场主题互联网动态</p>
+					            		<div style="border:1px solid red" class="div-hide div-reject">
+					            			<form class="form-horizontal" role="form" style="margin-top:10px">
+											  <div class="form-group">
+											    <label for="input-reason1" class="col-sm-2 control-label">拒绝原因</label>
+											    <div class="col-sm-10">
+											    <textarea class="form-control" id="input-reason1" placeholder="......">我就是拒绝了你能怎么办？</textarea>
+											    </div>
+											  </div>
+											</form>
+					            		</div>
+				            		</div>
+				            		
+				            		<div>
+				            			<span></span>
+				            			<span style="padding:5px 20px 5px 0px">存储介质: ORCALE</span>
+				            			<span style="padding:5px 20px 5px 0px">资源大类: 卫生</span>
+				            			<span style="padding:5px 20px 5px 0px">服务器地址: 192.168.1.1</span>
+				            			<span style="padding:5px 20px 5px 0px">用户名: 哈哈</span>
+				            		</div>
 
+				            		<div class="panel panel-default">
+									    <div class="panel-heading">
+									      <h4 class="panel-title">
+									          由仅引用到可落地
+									      </h4>
+									    </div>
+									    <div class="panel-body">
+									    	<p>计划执行：每月30日 00：00开始</p>
+									    	<hr/> 
+									    	<p>增量方式：触发器</p>   
+									    </div>
+									  </div>
+				            	</div>
 
+				            </div></td>
+				        </tr>
+				        
+				        <tr class="clickable" id="2" data-toggle="collapse" data-target=".collapsed4">
+				            <td>社保</td>
+				            <td>医疗保险缴费情况</td>
+				            <td>落地</td>
+				            <td>允许</td>
+				            <td><a href="#" data-toggle="collapse" data-target=".collapsed4">查看</a></td>
+				        </tr>
+				        <tr class="collapse out budgets collapsed4">
+				            <td colspan="6"><div>
+				            	<div class="child-row">
+				            		<div class="child-row" style="display:inline-block;padding:5px">
+				            		<div style="display:inline">
+					            		<p style="font-size:24px;font-weight:600;margin-top:10px">医疗保险缴费情况</p>
+				            		</div>
+				            		
+				            		<div>
+				            			<span></span>
+				            			<span style="padding:5px 20px 5px 0px">存储介质: HBASE</span>
+				            			<span style="padding:5px 20px 5px 0px">资源大类: 卫生</span>
+				            			<span style="padding:5px 20px 5px 0px">服务器地址: 192.168.1.1</span>
+				            			<span style="padding:5px 20px 5px 0px">用户名: 哈哈</span>
+				            		</div>
 
+				            		<div class="panel panel-default">
+									    <div class="panel-heading">
+									      <h4 class="panel-title">
+									          同步方式
+									      </h4>
+									    </div>
+									    <div class="panel-body">
+									    	<p>HBASE路径：hbase://111.111.111.111</p>
+									    	<hr/> 
+									    	<p>ZooKeeper端口：2181</p>   
+									    </div>
+									  </div>
+				            	</div>
+				            	</div>
+				            </div></td>
+				        </tr>
+				        
+				    </tbody>
+				</table>
+		      </div>
+		      <div class="modal-footer">
+		        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+		      </div>
+		    </div>
+		  </div>
+		</div>
 
 
 		<!-- Modal -->

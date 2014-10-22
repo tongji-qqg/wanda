@@ -155,6 +155,23 @@
 	  </div>
 	</div>
 
+	<!-- Modal -->
+	<div class="modal fade" id="modal-1" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	  <div class="modal-dialog">
+	    <div class="modal-content">
+	      <div class="modal-header">
+	        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+	        <h4 class="modal-title" id="myModalLabel">Modal title</h4>
+	      </div>
+	      <div class="modal-body">
+	        用户xxx已挂起
+	      </div>
+	      <div class="modal-footer">
+	        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+	      </div>
+	    </div>
+	  </div>
+	</div>
 	<div class="footer">
 		<p>© Bryce 2014</p>
 	</div>
@@ -178,8 +195,10 @@
 			"day":["10","11","12","21","22"],
 			"state":["待审核","通过","不通过"],
 			"oper":["<a href='#' data-toggle='modal' data-target='#modal-0'>审核</a>", 
-					"<a href='#' data-toggle='modal' data-target='#modal-0'>审核</a>",
-					"<a href='#' data-toggle='modal' data-target='#modal-0'>审核</a>"]
+					"<a href='#' data-toggle='modal' data-target='#modal-0'>审核 </a>"+
+					"<a href='#' data-toggle='modal' data-target='#modal-1'> 挂起</a>",
+					"<a href='#' data-toggle='modal' data-target='#modal-0'>审核</a>"	
+					]
 		}
 		var counter = 1;
 		for(var i=0;i<15;i++){			

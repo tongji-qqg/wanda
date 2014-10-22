@@ -11820,6 +11820,49 @@
         </div>
       </div>
     </div>
+
+  <!-- Modal -->
+    <div class="modal fade" id="modal-apply" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+            <h4 class="modal-title" id="myModalLabel">申请DatasetA</h4>
+          </div>
+          <div class="modal-body">
+            <form role="form" class="form-horizontal">
+              <div class="form-group ">
+                <label class="col-sm-2 control-label" for="apply-type">申请类型</label>
+                <select class="col-sm-5 form-control" id="apply-type" style="width:70%;">
+                  <option>租户申请</option>
+                  <option>管理员申请</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label for="apply-level" class="control-label col-sm-2">重要程度</label>
+                <select id="apply-level" class="form-control col-sm-5" style="width:70%;">
+                  <option>1</option>
+                  <option>2</option>
+                  <option>3</option>
+                  <option>4</option>
+                  <option>5</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label  for="apply-reason" class="control-label  col-sm-2">申请理由</label>
+                <textarea id="apply-reason" class="form-control col-sm-5" style="width:70%;"></textarea>
+              </div>
+              <button onclick="alert('申请已经发送')" type="button" data-dismiss="modal" class="btn btn-default">Submit</button>
+            </form>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
       <!-- JQuery -->
   <script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
   <script src="http://code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
@@ -11855,7 +11898,7 @@
       "admin":["住院部","门诊部","信息科"],
       "level":["仅结构","落地","引用"],
       "state":["已断开","连接"],
-      "oper":["<a href='page_2.html'>配置任务</a>","<a href='#' data-toggle='modal' data-target='#modal-apply'>开放申请</a>"]
+      "oper":["<a href='page2.html'>配置任务</a>","<a href='#' data-toggle='modal' data-target='#modal-apply'>开放申请</a>"]
     }
     var counter = 1;
     for(var i=0;i<30;i++){
