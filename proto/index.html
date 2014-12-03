@@ -48,6 +48,22 @@
 			<a class="btn btn-lg btn-danger" href="open/meta.html">开放管理</a>
 			<a class="btn btn-lg btn-info" href="user/page_1.html">租户</a>
 			</p>
+
+			<video id="video" width="320" height="240" src="a.wmv"  controls autoplay preload="auto" poster="images/aa.png">
+            <script>
+                var video=document.getElementById("video");
+                video.addEventListener("error",function(){
+	                var error=video.error;
+	                switch(error.code){
+	                        case 1:alert("视频下载过程被中止。");break;
+	                        case 2:alert("网络错误");break;
+	                        case 3:alert("解码错误");break;
+	                        case 4:alert("不支持播放视频格式");break;
+
+	               	}
+                },false);
+            </script>
+			</video>
 		</div>
 	</div>	
 	<!-- JQuery -->
