@@ -1,0 +1,100 @@
+1. 不做任何设置，Hive 的默认元数据存储在当前目录下。所以打开hive的工作目录不同，看到的hive内容不同。
+
+2. 需要设置hive的元数据存储为mysql（或其他）。设置文件是hive-site.xml，一定要注意value 标签之间不能有空格，否则内容读取错误。坑...
+
+3. 要设置好hive的log输出，这样当错误发生时便可知道错误的原因。hive-log4j.properties, 里面不认识shell变量，我使用绝对路径输出日志。
+
+4. Sqoop mysql导入hive
+   ./bin/sqoop import  --hive-import --hive-table student --hive-drop-import-delims --hive-overwrite --connect jdbc:mysql://127.0.0.1:3306/meta --username bryce --password whoami --table tb1
+
+5. Sqoop mysql追加hive
+   ./bin/sqoop import --append --incremental append  --check-column id --last-value 0  --hive-import --hive-table dog --hive-drop-import-delims --hive-overwrite --connect jdbc:mysql://127.0.0.1:3306/meta --username bryce --password whoami --table tb1 
+
+6. 注意其中的ip地址若使用localhost会失败
+
+7. Sqoop 中有job的概念，这样就可以重复的向hive中追加sql来源的数据
+   sqoop job visit_import --create -- import  --connect jdbc:mysql://localhost:3306/main  --username root  --password pass --table user --columns "id,url,time" --direct --hive-import   --hive-table hive_visit_log --incremental append  --check-column id --last-value 0 
+
+   sqoop job --exec visit_import
+
+8. 如果导入时候需要采用分区，可以用--where控制条件配合--hive-partition-key dt --hive-partition-value '2011-03-21' 参数
+
+9. $HBASE_HOME/bin/start-hbase.sh
+   $HBASE_HOME/bin/stop-hbase.sh
+   $HBASE_HOME/bin/hbase shell
+   list 'studnet'
+   scna 'studnet'
+   export HBASE_HOME=/home/bryce/software/hbase-0.98.4-hadoop2
+
+10.hdfs dfs -ls -R /
+   hdfs dfs -put
+   hdfs dfs -get output output
+   hadoop jar share/hadoop/mapreduce/hadoop-mapreduce-examples-2.4.1.jar grep      input output 'dfs[a-z.]+'
+
+11.HBase,Hadoop在自己的安装目录下面自带说明文档
+
+12.关机后重启HDFS需要再用一次bin/hdfs namenode -format
+
+13. hive 可以insert into但是不能update 或者delete 一行数据
+
+14. create table user(uid int, cid string, name string) partitioned by(class string, day string) row format delimited fields terminated by '\t'
+
+create table bryce(uid int, cid string, name string) partitioned by(class string, day string) row format delimited fields terminated by '\t';
+load data local inpath '/home/hadoop/a.txt' into table bryce partition(class='1',day='11');
+
+15. netstat -ntulp | grep ':10000'
+	./bin/hive --service hiveserver2 &
+
+16. SHOW FULL COLUMNS FROM table_name;
+	ALTER TABLE t MODIFY col1 CHAR(50) CHARACTER SET utf8;
+
+	beeline connection:
+	!connect jdbc:hive2://localhost:10000 hadoop org.apache.hive.jdbc.HiveDriver
+
+17. hive api:http://docs.hortonworks.com/HDPDocuments/HDP1/HDP-1.2.4/ds_Hive/api/index.html
+ 	hive sql:http://docs.hortonworks.com/HDPDocuments/HDP1/HDP-1.2.4/ds_Hive/api/index.html
+
+ 	statement.execute(string sql) 
+ 	true if the first result is a ResultSet object; false if it is an update count or there are no results
+
+18. get hive table detail info
+	describe formatted sqoopm1;
+	show create table sqoopm1;
+
+19. install hue
+	https://github.com/cloudera/hue/wiki  --standard hue install instruction
+
+20. ganglia
+	install 	http://my.oschina.net/duangr/blog/181585
+	setenforce 0    --http://blog.csdn.net/knowledgeaaa/article/details/23352797
+
+21. hive security
+	http://www.cloudera.com/content/cloudera/en/documentation/cdh4/v4-2-0/CDH4-Security-Guide/cdh4sg_topic_9_1.html
+	kerberos: http://blog.javachen.com/2014/11/06/config-kerberos-in-cdh-hive/
+
+
+22. hue lib require
+	deb:
+	libkrb5-dev 
+	libmysqlclient-dev
+	libssl-dev
+	libsasl2-dev
+	libsasl2-modules-gssapi-mit
+	libsqlite3-dev
+	libtidy-0.99-0 (for unit tests only)
+	libxml2-dev
+	libxslt-dev
+	mvn (from maven package or maven3 tarball)
+	openldap-dev / libldap2-dev
+	python-dev
+	python-simplejson
+	python-setuptools
+
+	centos:
+	ant asciidoc cyrus-sasl-devel cyrus-sasl-gssapi gcc gcc-c++ krb5-devel libtidy libxml2-devel libxslt-devel mvn mysql mysql-devel openldap-devel python-devel python-sim plejson sqlite-devel
+
+23. mvn PATH setting
+	export M2_HOME=/usr/local/apache-maven
+	export M2=$M2_HOME/bin
+	export PATH=$M2:$PATH
+
